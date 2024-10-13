@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import "./Vendor.scss"
-import { getVendorService } from '../../services/userService'
+import { getVendorService } from '../../../services/userService'
 
 function Vendor() {
 

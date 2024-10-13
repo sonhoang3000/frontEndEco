@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import "./UserManage.scss";
-import { createNewUserService, getUserService, deleteUserService, updateUser } from '../../services/userService'
+import { createNewUserService, getUserService, deleteUserService, updateUser } from '../../../services/userService'
 
 function UserManage() {
 
