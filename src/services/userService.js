@@ -20,7 +20,11 @@ const updateUser = (inputData) => {
       return axios.put("/api/update-user", inputData)
 }
 
+const getVendorService = (vendorId) => {
+      return axios.get(`/api/get-all-vendors/?id=${vendorId}`)
+}
 
 export {
-      createNewUserService, getUserService, deleteUserService, updateUser
+      createNewUserService, getUserService, deleteUserService, updateUser,
+      getVendorService
 }

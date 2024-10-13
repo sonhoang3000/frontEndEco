@@ -17,14 +17,15 @@ function UserManage() {
 	const [fetchUserData, setFetchUserData] = useState([])
 
 	useEffect(() => {
+		// console.log('check fail')
 		const fetchUser = async () => {
 			try {
 				const response = await getUserService("ALL");
 				setFetchUserData(response.users); // Lưu dữ liệu vào state
-
 			} catch (error) {
 				console.log('fetch User error', error)
 			}
+
 		}
 
 		fetchUser();
@@ -104,6 +105,7 @@ function UserManage() {
 	}
 
 	let handleUpdateUser = async (item) => {
+		console.log('check item', item)
 		setDataUser({
 			idEditUser: item.id,
 			email: item.email,
