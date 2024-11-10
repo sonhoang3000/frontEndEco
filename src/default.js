@@ -1,14 +1,14 @@
 import React from 'react'
 
 
-function Default() {
+function Default123() {
 
       return (
             <div>
-                  Default
+                  Default123
             </div>
       )
 }
 
 
-export default Default
+export default Default123

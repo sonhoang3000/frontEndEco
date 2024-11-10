@@ -1,23 +1,22 @@
 
 import React, { useState, useEffect } from 'react'
 import "./Restaurant.scss"
-
+import { getRestaurantService } from "../../../services/superAdminService"
 
 function Restaurant() {
 
-      // const [fetchRestaurant, setFetchRestaurant] = useState([])
+      const [fetchRestaurant, setFetchRestaurant] = useState([])
 
       useEffect(() => {
-            // const fetchAllVendor = async () => {
-            // 	try {
-            // 		const responseVendor = await getVendorService("ALL")
-            // 		setFetchRestaurant(responseVendor.vendors)
-
-            // 	} catch (error) {
-            // 		console.log('fetch Vendor error', error)
-            // 	}
-            // }
-            // fetchAllVendor()
+            const fetchAllVendor = async () => {
+                  try {
+                        const responseRestaurant = await getRestaurantService("ALL")
+                        setFetchRestaurant(responseRestaurant.restaurants)
+                  } catch (error) {
+                        console.log('fetch Vendor error', error)
+                  }
+            }
+            fetchAllVendor()
       })
 
 
@@ -37,27 +36,22 @@ function Restaurant() {
                                     <th>Address</th>
                                     <th>Actions</th>
                               </tr>
-                              {/* {fetchVendor && fetchVendor.length > 0 &&
-						fetchVendor.map((item, index) => {
-							if (!item || !item.email || !item.totalRestaurants || !item.phoneNumber) {
-								return null; // Bỏ qua nếu item không hợp lệ
-							}
-							return (
-								<tr key={index}>
-									<td>{item.email}</td>
-									<td>{item.totalRestaurants}</td>
-									<td>{item.phoneNumber}</td>
-									<td>
-										<button
-											className="btn-edit" > <i className="fas fa-edit"></i> </button>
-										<button
-											className="btn-delete" > <i className="fas fa-trash"></i> </button>
-									</td>
-								</tr>
-							)
-						})
-
-					} */}
+                              {fetchRestaurant && fetchRestaurant.length > 0 &&
+                                    fetchRestaurant.map((item, index) => {
+                                          if (!item || !item.emailVendor || !item.nameRestaurant || !item.address) {
+                                                return null; // Bỏ qua nếu item không hợp lệ
+                                          }
+                                          return (
+                                                <tr key={index}>
+                                                      <td>Khong co image</td>
+                                                      <td>{item.emailVendor}</td>
+                                                      <td>{item.nameRestaurant}</td>
+                                                      <td>{item.address}</td>
+                                                      <td>{item.action ? 'Enable' : 'Disable'}</td>
+                                                </tr>
+                                          )
+                                    })
+                              }
                         </tbody>
                   </table>
             </>

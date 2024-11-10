@@ -42,8 +42,19 @@ function HeaderAdmin() {
 						<i className="fa-solid fa-motorcycle"></i>
 						Riders
 					</NavLink>
-
 				</div>
+
+				<div className='container-management'>
+					<div className='title'>management</div>
+
+					<NavLink to="/super-admin/cuisines"
+						className={({ isActive }) => (isActive ? 'menu-item active' : 'menu-item')}
+					>
+						<i class="fa-solid fa-burger"></i>
+						Cuisine
+					</NavLink>
+				</div>
+
 			</div>
 			<div className="container-right">
 				<Outlet />

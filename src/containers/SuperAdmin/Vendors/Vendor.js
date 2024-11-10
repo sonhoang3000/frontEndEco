@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import "./Vendor.scss"
-import { getVendorService } from '../../../services/userService'
+import { getVendorService } from '../../../services/superAdminService'
 
 function Vendor() {
 
@@ -58,6 +58,7 @@ function Vendor() {
 			<table id="TableVendors">
 				<tbody>
 					<tr>
+						<th>Image</th>
 						<th>Email</th>
 						<th>Total Restaurants</th>
 						<th>PhoneNumber</th>
@@ -70,6 +71,7 @@ function Vendor() {
 							}
 							return (
 								<tr key={index}>
+									<td>Khong co image</td>
 									<td>{item.email}</td>
 									<td>{item.totalRestaurants}</td>
 									<td>{item.phoneNumber}</td>

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import "./UserManage.scss";
-import { createNewUserService, getUserService, deleteUserService, updateUser } from '../../../services/userService'
+import { createNewUserService, getUserService, deleteUserService, updateUser } from '../../../services/superAdminService'
 
 function UserManage() {
 
 	const [dataUser, setDataUser] = useState({
 		idEditUser: '',
+		id: "",
 		email: '',
 		password: '',
 		name: '',
@@ -107,6 +108,7 @@ function UserManage() {
 	let handleUpdateUser = async (item) => {
 		console.log('check item', item)
 		setDataUser({
+			id: item.id,
 			idEditUser: item.id,
 			email: item.email,
 			name: item.name,

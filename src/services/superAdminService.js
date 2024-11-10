@@ -24,12 +24,17 @@ const getVendorService = (vendorId) => {
       return axios.get(`/api/get-all-vendors/?id=${vendorId}`)
 };
 const userLogin = (formData) => {
-  return axios.post(`/api/login`, formData);
+      return axios.post(`/api/login`, formData);
 };
 const userRegister = (formData) => {
-  return axios.post(`/api/register`, formData);
+      return axios.post(`/api/register`, formData);
 };
+
+const getRestaurantService = (emailVendor) => {
+      return axios.get(`/api/get-all-restaurant/?emailVendor=${emailVendor}`)
+}
+
 export {
       createNewUserService, getUserService, deleteUserService, updateUser,
-      getVendorService, userLogin, userRegister,
-    };
+      getVendorService, userLogin, userRegister, getRestaurantService
+};
