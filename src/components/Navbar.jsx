@@ -1,102 +1,89 @@
-import React, { useEffect, useState } from "react";
-import "../css/Navbar.css";
-
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import icon from "../assets/icon/location_on.png";
+import { ShoppingCartOutlined } from "@ant-design/icons";
+import { Badge } from "antd";
 import flag from "../assets/img/Co-Vietnam.webp";
 import logo from "../assets/img/logo_mealmate.png";
+import "../css/Navbar.css";
 
 function Navbar() {
-  const [isOpen, setIsOpen] = useState(false); 
-  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false); 
-  const [location, setLocation] = useState("Tp. HCM");
-  const [user, setUser] = useState();
+  const [searchQuery, setSearchQuery] = useState(""); // State lưu từ khóa tìm kiếm
+  const [cartItemCount, setCartItemCount] = useState(0); // Số lượng sản phẩm trong giỏ hàng
+  const [user, setUser] = useState(null); // Thông tin người dùng
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false); // Trạng thái dropdown người dùng
   const navigate = useNavigate();
 
-  const toggleLocationDropdown = () => {
-    setIsOpen(!isOpen);
+  useEffect(() => {
+    // Lấy thông tin người dùng từ localStorage
+    const userInfo = localStorage.getItem("user");
+    if (userInfo) {
+      setUser(JSON.parse(userInfo));
+    }
+
+    // Lấy số lượng sản phẩm trong giỏ hàng từ localStorage
+    const currentCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCartItemCount(currentCart.length);
+  }, []);
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+    console.log("Searching for:", e.target.value); // Log giá trị tìm kiếm
+};
+
+const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+        console.log("Navigating to search-results with query:", searchQuery); // Log trước khi chuyển hướng
+        navigate(`/search-results?name=${searchQuery}`);
+    }
+};
+
+
+  const handleCartClick = () => {
+    navigate("/Cart");
+  };
+
+  const handleFoodClick = () => {
+    navigate("/ListProduct");
   };
 
   const toggleUserDropdown = () => {
     setIsUserDropdownOpen(!isUserDropdownOpen);
   };
 
-  useEffect(() => {
-    const userInfo = localStorage.getItem("user");
-    if (userInfo) {
-      setUser(JSON.parse(userInfo));
-    }
-  }, []);
-
-  const handleLocationChange = (newLocation) => {
-    setLocation(newLocation); 
-    setIsOpen(false);
-  };
-
-  const handleFoodClick = () => {
-    navigate("/ListProduct"); 
-  };
-  const handleCartClick = () => {
-    navigate("/Cart"); 
-  };
-
   const handleLogout = () => {
     localStorage.clear();
     setUser(null);
     setIsUserDropdownOpen(false);
+    navigate("/");
   };
 
   return (
     <nav className="navbar">
-      <div className="logo">
+      <div className="logo" onClick={() => navigate("/")}>
         <img src={logo} alt="Meal Mate Logo" className="logo-image" />
         Meal Mate
       </div>
 
       <div className="find_product">
-        <input type="text" placeholder="Tìm kiếm" className="search-bar" />
-      </div>
-
-      <div
-        className="location"
-        onClick={toggleLocationDropdown}
-        style={{ cursor: "pointer" }}
-      >
-        <img src={icon} alt="" className="location_icon" />
-        {location}
-        {isOpen && (
-          <div className="dropdown">
-            <div
-              className="dropdown-item"
-              onClick={() => handleLocationChange("TP.HCM")}
-            >
-              TP.HCM
-            </div>
-            <div
-              className="dropdown-item"
-              onClick={() => handleLocationChange("Hà Nội")}
-            >
-              Hà Nội
-            </div>
-            <div
-              className="dropdown-item"
-              onClick={() => handleLocationChange("Đà Nẵng")}
-            >
-              Đà Nẵng
-            </div>
-          </div>
-        )}
+        <input
+          type="text"
+          placeholder="Tìm kiếm"
+          className="search-bar"
+          value={searchQuery}
+          onChange={handleSearch}
+          onKeyDown={handleKeyDown} // Bắt sự kiện khi nhấn Enter
+        />
       </div>
 
       <div className="menu">
-  <div
-    className="menu-item"
-    onClick={handleFoodClick}
-    style={{ cursor: "pointer" }}
-  >
-    <span>Sản phẩm</span>
-  </div>
-        
+        <div
+          className="menu-item"
+          onClick={handleFoodClick}
+          style={{ cursor: "pointer" }}
+        >
+          <span>Sản phẩm</span>
+        </div>
+
         <a
           href="#"
           onClick={(e) => {
@@ -106,6 +93,12 @@ function Navbar() {
         >
           Liên Hệ
         </a>
+      </div>
+
+      <div className="dropdown-item" onClick={handleCartClick}>
+        <Badge count={cartItemCount} offset={[10, 0]}>
+          <ShoppingCartOutlined className="cart-icon" />
+        </Badge>
       </div>
 
       {user?.id ? (
@@ -119,14 +112,14 @@ function Navbar() {
           </span>
           {isUserDropdownOpen && (
             <div className="dropdown user-dropdown">
-              <div className="dropdown-item" onClick={() => navigate("/profile")}>
+              <div
+                className="dropdown-item"
+                onClick={() => navigate("/profile")}
+              >
                 Profile
               </div>
               <div className="dropdown-item" onClick={handleLogout}>
                 Logout
-              </div>
-              <div className="dropdown-item" onClick={handleCartClick}>
-                Cart
               </div>
             </div>
           )}
@@ -134,7 +127,7 @@ function Navbar() {
       ) : (
         <div className="login">
           <button className="login-button" onClick={() => navigate("/login")}>
-            Đăng nhập 
+            Đăng nhập
           </button>
         </div>
       )}

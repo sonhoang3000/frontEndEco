@@ -4,6 +4,14 @@ const getAllProductService = (productId) => {
     return axios.get(`/api/get-all-product/?id=${productId}`)
 }
 
+// Hàm tìm kiếm sản phẩm theo tên
+const searchProductsService = (searchQuery) => {
+    const queryParam = searchQuery ? `?name=${searchQuery}` : '';  // Kiểm tra nếu có từ khóa tìm kiếm
+    return axios.get(`/api/search-product${queryParam}`);  // Đổi thành '/api/search-product'
+}
+
+
+
 const createNewProductService = (data) => {
     return axios.post('/api/create-new-product', data)
 }
@@ -24,5 +32,11 @@ const getAllCart = () => {
     return axios.get("/api/get-all-cart")
 }
 
-export { createNewProductService, deleteProductService, getAllCart, getAllProductService, updateProduct }
-
+export { 
+    createNewProductService, 
+    deleteProductService, 
+    getAllCart, 
+    getAllProductService, 
+    updateProduct, 
+    searchProductsService 
+  };

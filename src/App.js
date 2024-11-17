@@ -16,6 +16,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import ListProduct from "./pages/ListProduct/ListProduct";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import UserProfile from "./pages/UserProfile/UserProfile";
+import SearchResults from "./components/SearchResults";
 
 function App() {
   const router = createBrowserRouter(
@@ -29,6 +30,7 @@ function App() {
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/profile" element={<UserProfile />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/search-results" element={<SearchResults />} />
 
       </Route>
     )

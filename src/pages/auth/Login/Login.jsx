@@ -26,30 +26,28 @@ const Login = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      console.log('location',location)
       try {
         const response = await userLogin({
           email: values.email,
           password: values.password,
         });
-        
+
         if (response.errCode === 0) {
-          console.log('check errCode =0')
           toast.success("Đăng nhập thành công!");
           localStorage.setItem("user", JSON.stringify(response.user));
-          if(location?.state){
-            navigate(location?.state)
-          }else{
-            navigator("/")
+
+          if (location?.state) {
+            navigate(location?.state);
+          } else {
+            navigate("/");
           }
-          
         } else {
           toast.error("Thông tin tài khoản hoặc mật khẩu không chính xác!");
           setErrorMessage("Tên đăng nhập hoặc mật khẩu không chính xác.");
         }
       } catch (error) {
         setErrorMessage("Đã xảy ra lỗi trong quá trình đăng nhập.");
-        console.error("Login error:", error);
+        console.error("Lỗi đăng nhập:", error);
       }
     },
   });
@@ -57,13 +55,13 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="logo__wrappwer">
-        <img src={logo} alt="Delicious meal" className="meal__logo" />
+        <img src={logo} alt="Logo Meal Mate" className="meal__logo" />
         <span className="logo__title">MEAL MATE</span>
       </div>
 
       <div className="login__content">
         <div className="login__wrapper">
-          <img src={loginImage} alt="Delicious meal" className="meal-image" />
+          <img src={loginImage} alt="Hình ảnh món ăn" className="meal-image" />
 
           <div className="login__form">
             <h2 className="login__title">Đăng nhập</h2>
@@ -80,10 +78,13 @@ const Login = () => {
                 <input
                   type="text"
                   name="email"
-                  placeholder="email"
+                  placeholder="Email"
                   onChange={formik.handleChange}
                   value={formik.values.email}
                 />
+                {formik.errors.email && (
+                  <div className="error-message">{formik.errors.email}</div>
+                )}
               </div>
 
               <div
@@ -102,14 +103,18 @@ const Login = () => {
                   onChange={formik.handleChange}
                   value={formik.values.password}
                 />
+                {formik.errors.password && (
+                  <div className="error-message">{formik.errors.password}</div>
+                )}
               </div>
 
               <div className="login-links">
                 <a href="#">Quên mật khẩu?</a>
-                <Link to="/register">Bạn chưa có tài khoản? Đăng Kí?</Link>
+                <Link to="/register">Bạn chưa có tài khoản? Đăng Ký?</Link>
               </div>
               <button type="submit">Đăng nhập</button>
             </form>
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
           </div>
         </div>
       </div>

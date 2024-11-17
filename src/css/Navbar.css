@@ -73,11 +73,9 @@
 }
 
 .dropdown-item {
-  padding: 10px 15px;
-  font-size: 20px;
-  color: #d79875;
+  
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  
 }
 
 .dropdown-item:hover {
@@ -87,7 +85,7 @@
 /* Menu styles */
 .menu {
   display: flex;
-  gap: 15px;
+  gap: 40px;
 }
 
 .menu-item {
@@ -143,11 +141,6 @@
   color: white;
 }
 
-.flag {
-  width: 50px;
-  padding-right: 10px;
-}
-
 /* User dropdown */
 .userInfo-wrapper .user-dropdown,
 .location .dropdown {
@@ -157,4 +150,15 @@
 
 .user-dropdown .dropdown-item {
   padding: 10px 15px;
+}
+
+.dropdown-item .ant-badge .cart-icon {
+  font-size: 35px;
+  background-color: #d79875;
+  color: white !important;
+}
+
+.flag {
+  width: 50px;
+  padding-right: 10px;
 }
