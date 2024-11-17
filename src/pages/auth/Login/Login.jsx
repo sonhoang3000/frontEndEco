@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { FaLock, FaUser } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import loginImage from "../../../assets/img/loginImg.jpeg";
@@ -16,7 +16,9 @@ const validationSchema = Yup.object().shape({
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
-  const navigator = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -24,16 +26,23 @@ const Login = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
+      console.log('location',location)
       try {
         const response = await userLogin({
           email: values.email,
           password: values.password,
         });
+        
         if (response.errCode === 0) {
           console.log('check errCode =0')
           toast.success("Đăng nhập thành công!");
           localStorage.setItem("user", JSON.stringify(response.user));
-          navigator("/");
+          if(location?.state){
+            navigate(location?.state)
+          }else{
+            navigator("/")
+          }
+          
         } else {
           toast.error("Thông tin tài khoản hoặc mật khẩu không chính xác!");
           setErrorMessage("Tên đăng nhập hoặc mật khẩu không chính xác.");

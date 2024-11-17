@@ -1,12 +1,14 @@
 import React from "react";
+import "../../css/App.css";
+
 import Footer from "../../components/Footer";
 import MainSection from "../../components/MainSection";
 import Navbar from "../../components/Navbar";
-import "../../css/App.css";
+
 
 function HomePage() {
   return (
-    <div className="conatiner">
+    <div className="container">
       <Navbar />
       <main>
         <MainSection />

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Navbar from '../../components/Navbar'; // Nhập Navbar vào đây
+import Navbar from '../../components/Navbar';
 import { getAllProductService } from '../../services/productService';
 import "./ListProduct.css";
 
@@ -21,11 +21,10 @@ const ListProduct = () => {
 
     fetchProduct()
 
-  }, []) // Thêm dependency array để tránh gọi vô hạn
+  }, []) 
 
   return (
     <div className="product-page">
-      {/* Chèn Navbar vào đây */}
       <Navbar />
       
       {fetchProductData && fetchProductData.length > 0 ? (

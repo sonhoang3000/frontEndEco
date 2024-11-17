@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./css/App.css";
 import Login from "./pages/auth/Login/Login";
 import Register from "./pages/auth/Register/Register";
+import CartPage from "./pages/Cart/CartPage";
 import ContactPage from "./pages/Contactpage/Contactpage";
 import HomePage from "./pages/HomePage/HomePage";
 import ListProduct from "./pages/ListProduct/ListProduct";
@@ -27,6 +28,7 @@ function App() {
         <Route path="/listproduct" element={<ListProduct />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/profile" element={<UserProfile />} />
+        <Route path="/cart" element={<CartPage />} />
 
       </Route>
     )

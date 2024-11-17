@@ -95,7 +95,6 @@ function Navbar() {
     style={{ cursor: "pointer" }}
   >
     <span>Sản phẩm</span>
-    <div className="underline"></div>
   </div>
         
         <a
@@ -135,7 +134,7 @@ function Navbar() {
       ) : (
         <div className="login">
           <button className="login-button" onClick={() => navigate("/login")}>
-            Đăng nhập
+            Đăng nhập 
           </button>
         </div>
       )}
