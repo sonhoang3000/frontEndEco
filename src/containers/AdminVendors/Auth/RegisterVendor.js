@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './RegisterVendor.scss'
+import './RegisterVendor.css'
 import { registerNewVendor } from "../../../services/vendorAdminService"
 
 function RegisterVendor() {

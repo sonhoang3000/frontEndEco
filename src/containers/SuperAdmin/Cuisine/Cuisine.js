@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import { getAllCuisineService } from "../../../services/cuisineService"
-import './Cuisine.scss'
+import './Cuisine.css'
 
 function Cuisine() {
       const [fetchCuisines, setfetchCuisines] = useState([]);

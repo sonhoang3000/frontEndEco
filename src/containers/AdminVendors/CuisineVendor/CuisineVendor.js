@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import './CuisineVendor.scss'
+import './CuisineVendor.css'
 import { toast } from "react-toastify";
 import { getAllProductService, createNewProductService, deleteProductService, updateProduct } from '../../../services/vendorAdminService'
 

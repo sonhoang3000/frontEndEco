@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import "./Vendor.scss"
+import "./Vendor.css"
 import { getVendorService } from '../../../services/superAdminService'
 
 function Vendor() {

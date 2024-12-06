@@ -1,5 +1,5 @@
 import React from 'react';
-import './HeaderAdmin.scss';
+import './HeaderAdmin.css';
 import { NavLink, Outlet } from 'react-router-dom'
 
 

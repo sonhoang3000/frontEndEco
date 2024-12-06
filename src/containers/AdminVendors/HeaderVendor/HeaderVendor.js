@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './HeaderVendor.scss';
+import './HeaderVendor.css';
 import { useNavigate, NavLink, Outlet } from 'react-router-dom';
 
 function HeaderVendor() {

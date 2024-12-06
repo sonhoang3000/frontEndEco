@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import "./App.scss";
+import "./App.css";
 //Admin 
 import HeaderAdmin from './SuperAdmin/HeaderAdmin/HeaderAdmin';
 import UserManage from './SuperAdmin/Users/UserManage';

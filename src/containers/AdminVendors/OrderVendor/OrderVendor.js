@@ -1,5 +1,5 @@
 import React from 'react'
-import './OrderVendor.scss'
+import './OrderVendor.css'
 
 function OrderVendor() {
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import "./UserManage.scss";
+import "./UserManage.css";
 import { createNewUserService, getUserService, deleteUserService, updateUser } from '../../../services/superAdminService'
 import { toast } from "react-toastify";
 

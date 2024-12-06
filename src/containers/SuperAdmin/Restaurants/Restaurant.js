@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react'
-import "./Restaurant.scss"
+import "./Restaurant.css"
 import { getRestaurantService } from "../../../services/superAdminService"
 
 function Restaurant() {

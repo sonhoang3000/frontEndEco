@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { loginVendor } from "../../../services/vendorAdminService"
 import { useNavigate } from 'react-router-dom';
-import './LoginVendor.scss'
+import './LoginVendor.css'
 import { toast } from "react-toastify";
 
 function LoginVendor() {
