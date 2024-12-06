@@ -77,13 +77,13 @@ function Navbar() {
         </a>
       </div>
 
-      <div className="dropdown-item" onClick={handleCartClick}>
+      {/* <div className="dropdown-item" onClick={handleCartClick}>
         <Badge count={cartItemCount} offset={[10, 0]}>
           <ShoppingCartOutlined
             style={{ fontSize: "35px", backgroundColor: "#d79875" }}
           />
         </Badge>
-      </div>
+      </div> */}
 
       {user?.id ? (
         <div className="userInfo-wrapper">

@@ -80,7 +80,7 @@ function Navbar() {
           <div className="underline"></div>
         </div>
         <a
-          href="#"
+          href="/"
           onClick={(e) => {
             e.preventDefault();
             navigate("/Contactpage");

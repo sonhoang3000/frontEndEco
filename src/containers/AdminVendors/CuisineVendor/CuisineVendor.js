@@ -27,6 +27,7 @@ function CuisineVendor() {
 					return;
 				}
 				const response = await getAllProductService("ALL");
+
 				if (response && response.products) {
 					const filteredProducts = response.products.filter(
 						(product) => product.vendorId === vendor.id
@@ -34,7 +35,7 @@ function CuisineVendor() {
 					setfetchProducts(filteredProducts);
 				}
 			} catch (error) {
-				console.log('fetch User error', error)
+				console.log('fetch product error', error)
 			}
 
 		}
@@ -46,6 +47,7 @@ function CuisineVendor() {
 	let onChangeInput = (event, id) => {
 		let copyState = { ...productVendor };
 		copyState[id] = event.target.value;
+		console.log('check copyState', copyState)
 		setProductVendor({
 			...copyState
 		})
@@ -96,6 +98,7 @@ function CuisineVendor() {
 						description: "",
 						ingredients: "",
 						price: "",
+						category: "",
 					});
 					toast.success("Tạo sản phẩm thành công");
 
@@ -122,6 +125,7 @@ function CuisineVendor() {
 						description: "",
 						ingredients: "",
 						price: "",
+						category: "",
 					});
 					toast.success("Sửa sản phẩm thành công");
 
@@ -178,7 +182,6 @@ function CuisineVendor() {
 						name="ingredients"
 						value={productVendor.ingredients}
 						onChange={(event) => { onChangeInput(event, 'ingredients') }}
-
 					/>
 					<input
 						type="number"
@@ -186,8 +189,20 @@ function CuisineVendor() {
 						name="price"
 						value={productVendor.price}
 						onChange={(event) => { onChangeInput(event, 'price') }}
-
 					/>
+					<select
+						name="category"
+						value={productVendor.category}
+						onChange={(event) => onChangeInput(event, 'category')}
+					>
+						<option value="">Select Category</option>
+						<option value="food">Đồ ăn</option>
+						<option value="drink">Đồ uống</option>
+						<option value="fruit">Trái cây</option>
+						<option value="cake">Bánh</option>
+						<option value="fastfood">Fast-Food</option>
+					</select>
+
 					<button type="submit"
 						className={actionEdit === true ? "edit-button" : "save-button"}
 						onClick={() => handleSaveProductAndEdit()}
@@ -207,6 +222,7 @@ function CuisineVendor() {
 						<th>Description</th>
 						<th>Ingredients</th>
 						<th>Price</th>
+						<th>Category</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -225,6 +241,7 @@ function CuisineVendor() {
 							<td>{item.description}</td>
 							<td>{item.ingredients}</td>
 							<td>{item.price}</td>
+							<td>{item.category}</td>
 							<td>
 								<div className="action-buttons">
 									<button

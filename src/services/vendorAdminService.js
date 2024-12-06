@@ -10,6 +10,7 @@ const loginVendor = (data) => {
 };
 
 const getAllProductService = (productId) => {
+      // console.log('check productId', productId)
       return axios.get(`/api/get-all-product/?id=${productId}`)
 }
 
