@@ -1,13 +1,13 @@
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import React from "react";
 import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 import logo from "../../../assets/img/logo_mealmate.png";
 import registerImg from "../../../assets/img/registerImg.jpeg";
 import { userRegister } from "../../../services/userService";
 import "./Register.css";
-import { toast } from "react-toastify";
 
 // Validation schema using Yup
 const validationSchema = Yup.object().shape({
@@ -23,7 +23,7 @@ const validationSchema = Yup.object().shape({
 
 const Register = () => {
   const navigator = useNavigate();
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -44,10 +44,10 @@ const Register = () => {
           toast.error(
             response?.errMessage || "Có lỗi xảy ra vui lòng thử lại!"
           );
-          setErrorMessage("Tên đăng nhập hoặc mật khẩu không chính xác.");
+          // setErrorMessage("Tên đăng nhập hoặc mật khẩu không chính xác.");
         }
       } catch (error) {
-        setErrorMessage("Đã xảy ra lỗi trong quá trình đăng nhập.");
+        // setErrorMessage("Đã xảy ra lỗi trong quá trình đăng nhập.");
         console.error("Login error:", error);
       }
     },

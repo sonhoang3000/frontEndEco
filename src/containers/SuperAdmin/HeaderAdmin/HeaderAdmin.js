@@ -50,7 +50,7 @@ function HeaderAdmin() {
 					<NavLink to="/super-admin/cuisines"
 						className={({ isActive }) => (isActive ? 'menu-item active' : 'menu-item')}
 					>
-						<i class="fa-solid fa-burger"></i>
+						<i className="fa-solid fa-burger"></i>
 						Cuisine
 					</NavLink>
 				</div>

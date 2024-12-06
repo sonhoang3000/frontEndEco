@@ -5,12 +5,10 @@
     font-optical-sizing: auto;
     font-weight: 300;
     font-style: normal;
-    color: black;
 }
 
 .footer {
     background-color: #ffffff; /* Màu nền tối */
-    color: white; /* Màu chữ trắng */
     padding: 20px 0;
     text-align: center;
     position: relative;
@@ -51,6 +49,7 @@
 .txt1 {
     font-weight: 600;
     font-size: 20px;
+    color: black;
 }
 
 a{

@@ -1,7 +1,8 @@
 export const path = {
       //superadmin
-      HOME: "/",
       SUPERADMIN: "/super-admin",
+
+      HOME: "/",
       VENDORS: "vendors",
       RESTAURANTS: "restaurants",
       USERS: "users",
@@ -10,5 +11,8 @@ export const path = {
 
       //vendoradmin
       VENDORADMIN: "/vendor-admin",
+      LOGIN: "/login-vendor",
+      REGISTER: "/register-vendor",
+      VERIFY_EMAIL: "/verify-email/:token"
 
 }

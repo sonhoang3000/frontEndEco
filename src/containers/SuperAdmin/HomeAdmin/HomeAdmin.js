@@ -6,7 +6,7 @@ function HomeAdmin() {
 
       return (
             <div>
-                  HomeAdmin
+                  HomeAdmin123
             </div>
       )
 }

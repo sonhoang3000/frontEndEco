@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { getAllCuisineService, createNewCuisineService } from "../../../services/cuisineService"
+import { getAllCuisineService } from "../../../services/cuisineService"
 import './Cuisine.scss'
 
 function Cuisine() {

@@ -1,10 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Write from '../components/test/Write';
-import Read from '../components/test/Read';
 import "./App.scss";
-import { connect } from "react-redux";
-import { history } from "../redux";
-
 //Admin 
 import HeaderAdmin from './SuperAdmin/HeaderAdmin/HeaderAdmin';
 import UserManage from './SuperAdmin/Users/UserManage';
@@ -16,6 +11,15 @@ import HomeAdmin from './SuperAdmin/HomeAdmin/HomeAdmin';
 
 //Vendor
 import HeaderVendor from './AdminVendors/HeaderVendor/HeaderVendor'
+import LoginVendor from './AdminVendors/Auth/LoginVendor';
+import RegisterVendor from './AdminVendors/Auth/RegisterVendor';
+import VerifyEmail from './AdminVendors/Auth/VerifyEmail';
+import HomeVendor from './AdminVendors/HomeVendor/HomeVendor';
+import CuisineVendor from './AdminVendors/CuisineVendor/CuisineVendor';
+import OrderVendor from './AdminVendors/OrderVendor/OrderVendor';
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { path } from "../utils";
 
@@ -23,14 +27,10 @@ function App() {
 
 	return (
 		<div className='App'>
-			<Router history={history}>
+			<Router >
 				<div className="main-container">
 					<div className="content-container">
 						<Routes>
-							<Route path="/" element={<Write />} />
-							<Route path="/write" element={<Write />} />
-							<Route path="/read" element={<Read />} />
-							
 							{/* SuperAdmin */}
 							<Route path={path.SUPERADMIN} element={<HeaderAdmin />} >
 								{/* Home */}
@@ -44,13 +44,22 @@ function App() {
 								<Route path={path.CUISINES} element={<Cuisine />} />
 							</Route>
 
+							<Route path={path.LOGIN} element={<LoginVendor />} />
+							<Route path={path.REGISTER} element={<RegisterVendor />} />
+							<Route path={path.VERIFY_EMAIL} element={<VerifyEmail />} />
+
 							{/* Vendor */}
-							<Route path={path.VENDORADMIN} element={<HeaderVendor />}>
-								{/* <Route path="home" element={<HeaderVendor />} /> */}
+							<Route path={path.VENDORADMIN} element={<HeaderVendor />}>								{/* <Route path="home" element={<HeaderVendor />} /> */}
+								<Route path="home" element={<HomeVendor />} />
+								<Route path="cuisine" element={<CuisineVendor />} />
+								<Route path="order" element={<OrderVendor />} />
 
 							</Route>
 
 						</Routes>
+
+						<ToastContainer />
+
 					</div>
 				</div>
 
@@ -60,14 +69,4 @@ function App() {
 	)
 }
 
-const mapStateToProps = (state) => {
-	return {
-		isLoggedIn: state.user.isLoggedIn,
-	};
-};
-
-const mapDispatchToProps = (dispatch) => {
-	return {};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

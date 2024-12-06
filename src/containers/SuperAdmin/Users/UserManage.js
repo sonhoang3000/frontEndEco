@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import "./UserManage.scss";
 import { createNewUserService, getUserService, deleteUserService, updateUser } from '../../../services/superAdminService'
+import { toast } from "react-toastify";
 
 function UserManage() {
 
@@ -10,7 +11,7 @@ function UserManage() {
 		email: '',
 		password: '',
 		name: '',
-		address: ''
+		phoneNumber: ''
 	});
 
 	const [actionEdit, setActionEdit] = useState(false)
@@ -18,7 +19,6 @@ function UserManage() {
 	const [fetchUserData, setFetchUserData] = useState([])
 
 	useEffect(() => {
-		// console.log('check fail')
 		const fetchUser = async () => {
 			try {
 				const response = await getUserService("ALL");
@@ -43,7 +43,7 @@ function UserManage() {
 
 	let checkValidateInput = () => {
 		let isValid = true;
-		let arrCheck = ['email', 'password', 'name', 'address']
+		let arrCheck = ['email', 'password', 'name', 'phoneNumber']
 		for (let i = 0; i < arrCheck.length; i++) {
 			if (!dataUser[arrCheck[i]]) {
 				isValid = false;
@@ -56,25 +56,23 @@ function UserManage() {
 	}
 
 	let handleSaveUserAndEdit = async () => {
-		console.log('check actionEdit', actionEdit)
 		if (actionEdit === false) {
 			let userValid = checkValidateInput();
-
 			if (userValid === false) return;
 			try {
 				const response = await createNewUserService(dataUser);
-				console.log('check response', response)
 				if (response && response.errCode === 0) {
 					const getALLUser = await getUserService("ALL");
-					setFetchUserData([...fetchUserData, getALLUser.user]);
+					console.log('check getALLUser', getALLUser)
+					setFetchUserData(getALLUser.users);
 					setDataUser({
-						email: '',
-						password: '',
-						name: '',
-						address: ''
+						email: "",
+						password: "",
+						name: "",
+						phoneNumber: "",
 					});
+					toast.success("Tạo sản phẩm thành công");
 				}
-
 			} catch (error) {
 				console.error('Error adding user:', error);
 			}
@@ -87,7 +85,7 @@ function UserManage() {
 					email: '',
 					password: '',
 					name: '',
-					address: ''
+					phoneNumber: ''
 				});
 				setActionEdit(false);
 			} catch (error) {
@@ -97,11 +95,11 @@ function UserManage() {
 
 	}
 
-	let handleDeleteUser = (id) => {
-		const deleteUser = deleteUserService(id);
+	let handleDeleteUser = async (id) => {
+		const deleteUser = await deleteUserService(id);
 		if (deleteUser) {
-			console.log('check ok')
-			setFetchUserData(dataUser => dataUser.filter(user => user.id !== id));
+			setFetchUserData(prevProducts => prevProducts.filter(product => product._id !== id));
+			toast.success("Tạo sản phẩm thành công");
 		}
 	}
 
@@ -111,8 +109,9 @@ function UserManage() {
 			id: item.id,
 			idEditUser: item.id,
 			email: item.email,
+			password: item.password,
 			name: item.name,
-			address: item.address,
+			phoneNumber: item.phoneNumber,
 		})
 	}
 
@@ -136,6 +135,7 @@ function UserManage() {
 							<div className="col-3">
 								<label> Mật khẩu</label>
 								<input className='form-control' type="text"
+									value={dataUser.password}
 									onChange={(event) => { onChangeInput(event, 'password') }}
 								/>
 							</div>
@@ -147,10 +147,10 @@ function UserManage() {
 								/>
 							</div>
 							<div className="col-3">
-								<label>Address</label>
+								<label>Phone Number</label>
 								<input className='form-control' type="text"
-									value={dataUser.address}
-									onChange={(event) => { onChangeInput(event, 'address') }}
+									value={dataUser.phoneNumber}
+									onChange={(event) => { onChangeInput(event, 'phoneNumber') }}
 								/>
 							</div>
 							<div className="col-12 my-3">
@@ -171,19 +171,16 @@ function UserManage() {
 					<tr>
 						<th>Email</th>
 						<th>Name</th>
-						<th>Address</th>
+						<th>Phone Number</th>
 						<th>Actions</th>
 					</tr>
 					{fetchUserData && fetchUserData.length > 0 &&
 						fetchUserData.map((item, index) => {
-							if (!item || !item.email || !item.name || !item.address) {
-								return null; // Bỏ qua nếu item không hợp lệ
-							}
 							return (
 								<tr key={index}>
 									<td>{item.email}</td>
 									<td>{item.name}</td>
-									<td>{item.address}</td>
+									<td>{item.phoneNumber}</td>
 									<td>
 										<button
 											onClick={() => {
@@ -192,7 +189,7 @@ function UserManage() {
 											}}
 											className="btn-edit" > <i className="fas fa-edit"></i> </button>
 										<button
-											onClick={() => handleDeleteUser(item.id)}
+											onClick={() => handleDeleteUser(item._id)}
 											className="btn-delete" > <i className="fas fa-trash"></i> </button>
 									</td>
 								</tr>
