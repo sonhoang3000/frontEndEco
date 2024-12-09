@@ -37,7 +37,10 @@ const Register = () => {
           email: values.email,
           password: values.password,
         });
+        console.log('check response', response)
+
         if (response.errCode === 0) {
+          console.log('check ')
           toast.success("Đăng Kí thành công!");
           navigator("/login");
         } else {

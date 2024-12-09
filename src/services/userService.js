@@ -27,6 +27,7 @@ const userLogin = (formData) => {
   return axios.post("/api/login", formData);
 };
 const userRegister = (formData) => {
+  console.log('check fromData', formData)
   return axios.post("/api/register", formData);
 
 };

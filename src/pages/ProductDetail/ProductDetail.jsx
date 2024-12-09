@@ -1,89 +1,194 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import "./ProductDetail.css";
+import { getAllProductService } from "../../services/productService"
+import { toast } from "react-toastify";
+import { getAllCart } from "../../services/productService";
+import { createNewCart } from "../../services/cartService";
+import { getAllSideDishService } from "../../services/sideDishService"
+
 
 const ProductDetail = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [product, setProduct] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+	const { id } = useParams();
+	const navigate = useNavigate();
+	const [product, setProduct] = useState([]);
+	const [selectAddProduct, setSelectAddProduct] = useState([]);
+	const [selectSideDishes, setSelectSideDishes] = useState([]);
 
-  useEffect(() => {
-    const fetchProductDetail = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:8080/api/get-all-product?id=${id}`
-        );
-        if (response.data.errCode === 0) {
-          setProduct(response.data.products);
-        } else {
-          setError(response.data.errMessage || "Không có sản phẩm");
-        }
-      } catch (err) {
-        setError("Lỗi khi tải chi tiết sản phẩm");
-        console.error("API lỗi:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
+	const storedVendor = localStorage.getItem("dataVendor");
+	const vendor = storedVendor ? JSON.parse(storedVendor) : null;
 
-    fetchProductDetail();
-  }, [id]);
+	const [selectedItems, setSelectedItems] = useState([]); // State để theo dõi món đã chọn
 
-  console.log("location", location);
+	useEffect(() => {
+		const fetchProductDetail = async () => {
+			try {
+				const response = await axios.get(
+					`http://localhost:8080/api/get-all-product?id=${id}`
+				);
 
-  const handleAddToCart = () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const userId = user ? user.id : null;
-  
-    if (userId) {
-      const currentCart = JSON.parse(localStorage.getItem("cart")) || [];
-      currentCart.push({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image,
-      });
-      localStorage.setItem("cart", JSON.stringify(currentCart));
-      navigate("/cart");
-    } else {
-      navigate("/login", { state: location?.pathname });
-    }
-  };
-  
+				const responseSideDishes = await getAllSideDishService("ALL")
 
-  return (
-    <>
-      <Navbar /> 
-      <div className="product-detail">
-        {loading ? (
-          <p>Đang tải...</p>
-        ) : error ? (
-          <p>{error}</p>
-        ) : (
-          <>
-            <h1>{product.name}</h1>
-            <img src={product.image} alt={product.name} />
-            <p>{product.description}</p>
-            <p>
-              <strong>Nguyên liệu:</strong>{" "}
-              {product.ingredients
-                ? product.ingredients.join(", ")
-                : "Không khả dụng"}
-            </p>
-            <p>
-              <strong>Giá:</strong> ${product.price}
-            </p>
-            <button onClick={handleAddToCart}>Thêm vào giỏ hàng</button>
-          </>
-        )}
-      </div>
-    </>
-  );
+				if (responseSideDishes && responseSideDishes.sideDishes) {
+					const filteredSideDishes = responseSideDishes.sideDishes.filter(
+						(sideDish) => response.data.products.sideDishId.includes(sideDish._id)
+					)
+					setSelectSideDishes(filteredSideDishes)
+				}
+
+				const responseAddProduct = await getAllProductService("ALL")
+
+				if (responseAddProduct && responseAddProduct.products) {
+					const filteredProducts = responseAddProduct.products.filter(
+						(product) => product.vendorId === vendor.id
+					);
+
+					const finalProducts = filteredProducts.filter(
+						(product) => product._id !== id
+					);
+
+					setSelectAddProduct(finalProducts)
+				}
+
+				if (response.data.errCode === 0) {
+					setProduct(response.data.products);
+				} else {
+					console.log(response.data.errMessage || "Không có sản phẩm");
+				}
+			} catch (err) {
+				console.log("Lỗi khi tải chi tiết sản phẩm");
+				console.error("API lỗi:", err);
+			}
+		};
+
+		fetchProductDetail();
+	}, [id]);
+
+	const handleAddToCart = async (product) => {
+		const user = JSON.parse(localStorage.getItem("user"));
+		const userId = user ? user.id : null;
+
+		console.log('check userId', userId)
+
+		if (!userId) {
+			toast.error("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng");
+			return;
+		}
+
+		const response = await getAllCart();
+
+		const userCarts = response.carts.filter(
+			(cart) => cart.idUser === user.id
+		);
+		const currentCart = Array.isArray(userCarts) ? userCarts : []; // Đảm bảo currentCart là một mảng
+
+		console.log('check currentCart', currentCart)
+
+		const productExists = currentCart.some((item) => item.nameProduct === product.name);
+
+		if (productExists) {
+			toast.warning("Sản phẩm đã có trong giỏ hàng");
+			return;
+		}
+
+		try {
+			const res = await createNewCart({
+				idUser: userId,
+				imageProduct: product.image,
+				nameProduct: product.name,
+				priceProduct: product.price,
+				sideDishId: selectedItems
+			});
+			if (res.errCode === 0) {
+				toast.success(res.message);
+			}
+		} catch (error) {
+			toast.error("Có lỗi xảy ra");
+		}
+	};
+
+	const handleSelectDish = (dishId) => {
+		if (selectedItems.includes(dishId)) {
+			// Nếu đã chọn, bỏ chọn
+			setSelectedItems(selectedItems.filter((id) => id !== dishId));
+		} else {
+			// Nếu chưa chọn, thêm vào
+			setSelectedItems([...selectedItems, dishId]);
+			console.log('check selectedItems', dishId)
+		}
+	};
+
+	useEffect(() => {
+		console.log('Danh sách món ăn đã chọn:', selectedItems);
+	}, [selectedItems]);
+
+	return (
+		<>
+			<Navbar />
+			<div className="product-detail">
+				<>
+					<h1>{product.name}</h1>
+					<img src={product.image} alt={product.name} />
+					<p>{product.description}</p>
+					<p>
+						<strong>Nguyên liệu:</strong>{" "}
+						{product.ingredients
+							? "co nguyen lieu"
+							: "Không khả dụng"}
+					</p>
+					<p>
+						<strong>Giá:</strong> ${product.price}
+					</p>
+					<p>
+						<strong>Danh mục:</strong> {product.category}
+					</p>
+					<button
+						onClick={() => handleAddToCart(product)}
+					>Thêm vào giỏ hàng</button>
+				</>
+			</div>
+
+			<div className="list-product-category">
+				<div className="product-carousel">
+					{selectAddProduct.map((product) => (
+						<div key={product._id} className="product-card"
+							onClick={() => navigate(`/product/${product._id}`)}
+						>
+							<img src={product.image} alt={product.name} className="product-image" />
+							<p className="product-name">{product.name}</p>
+						</div>
+					))}
+				</div>
+				{/* <button className="carousel-btn left" onClick={moveLeft()}>❮</button>
+				<button className="carousel-btn right" onClick={moveRight()}>❯</button> */}
+
+			</div>
+
+			<div className="show-add-side-dishes">
+				<h3>Các món ăn thêm có thể chọn</h3>
+				<ul className="side-dishes-list">
+					{selectSideDishes.map((dish) => (
+						<li key={dish._id}
+							className="side-dish-item"
+							onClick={() => handleSelectDish(dish._id)}
+						>
+							<div className="selection-indicator">
+								{selectedItems.includes(dish._id) && <div className="circle"></div>} {/* Hiện vòng tròn nếu đã chọn */}
+							</div>
+							<img src={dish.image} alt={dish.name} className="side-dish-img" />
+							<div className="side-dish-info">
+								<h4>{dish.name}</h4>
+								<p>{dish.price}</p>
+							</div>
+						</li>
+					))}
+				</ul>
+			</div>
+
+		</>
+	);
 };
 
 export default ProductDetail;

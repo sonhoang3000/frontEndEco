@@ -17,7 +17,7 @@ function HeaderAdmin() {
 				</NavLink>
 
 				<div className='container-general'>
-					<div className='title'>general</div>
+					<div className='title'>General</div>
 					<NavLink to="/super-admin/vendors"
 						className={({ isActive }) => (isActive ? 'menu-item active' : 'menu-item')}
 					>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import './CuisineVendor.css'
 import { toast } from "react-toastify";
 import { getAllProductService, createNewProductService, deleteProductService, updateProduct } from '../../../services/vendorAdminService'
+import { useNavigate } from 'react-router-dom';
 
 function CuisineVendor() {
 
@@ -15,6 +16,8 @@ function CuisineVendor() {
 		ingredients: "",
 		price: "",
 	});
+
+	const navigate = useNavigate();
 
 	const storedVendor = localStorage.getItem("dataVendor");
 	const vendor = storedVendor ? JSON.parse(storedVendor) : null;
@@ -40,7 +43,7 @@ function CuisineVendor() {
 
 		}
 		fetchProduct();
-	},)
+	}, [])
 
 	const [actionEdit, setActionEdit] = useState(false)
 
@@ -90,6 +93,7 @@ function CuisineVendor() {
 						const filteredProducts = responseProduct.products.filter(
 							(product) => product.vendorId === vendor.id
 						);
+						setfetchProducts((prev) => [...prev, response.newProduct]); // Thêm trực tiếp sản phẩm mới
 						setfetchProducts(filteredProducts);
 					}
 					setProductVendor({
@@ -217,6 +221,7 @@ function CuisineVendor() {
 				<thead>
 					<tr>
 						<th>STT</th>
+						<th>Mã đơn hàng</th>
 						<th>Name product</th>
 						<th>Image</th>
 						<th>Description</th>
@@ -228,8 +233,12 @@ function CuisineVendor() {
 				</thead>
 				<tbody>
 					{fetchProducts.map((item, index) => (
-						<tr key={item.id || index}>
+						<tr key={item.id || index}
+							className="table-row"
+							onClick={() => navigate(`/admin-detail-cuisine/${item._id}`)} // Điều hướng tới route mới
+						>
 							<td>{index + 1}</td> {/* STT bắt đầu từ 1 */}
+							<td>{item._id}</td>
 							<td>{item.name}</td>
 							<td>
 								<img
@@ -242,21 +251,29 @@ function CuisineVendor() {
 							<td>{item.ingredients}</td>
 							<td>{item.price}</td>
 							<td>{item.category}</td>
-							<td>
+							<td
+								onClick={(e) => {
+									e.stopPropagation(); // Ngăn sự kiện click vào hàng
+								}}
+							>
 								<div className="action-buttons">
 									<button
 										className="edit-button"
-										onClick={() => {
+										onClick={(e) => {
+											e.stopPropagation(); // Ngăn sự kiện click vào hàng
 											handleEditProduct(item)
 											setActionEdit(true)
 										}}
-
 									>
 										Update
 									</button>
 									<button
 										className="delete-button"
-										onClick={() => handleDeleteProduct(item._id)}
+										onClick={(e) => {
+											handleDeleteProduct(item._id)
+											e.stopPropagation(); // Ngăn sự kiện click vào hàng
+										}
+										}
 									>
 										Delete
 									</button>

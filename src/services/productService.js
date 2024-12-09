@@ -20,9 +20,13 @@ const updateProduct = (inputData) => {
     return axios.put("/api/update-product", inputData)
 }
 
+const updateSideDishProductService = (inputData) => {
+    return axios.put("/api/update-side-dishes-product", inputData)
+}
+
 const getAllCart = () => {
     return axios.get("/api/get-all-cart")
 }
 
-export { createNewProductService, deleteProductService, getAllCart, getAllProductService, updateProduct }
+export { createNewProductService, deleteProductService, getAllCart, getAllProductService, updateProduct, updateSideDishProductService }
 

@@ -6,6 +6,9 @@ import Navbar from "../../components/Navbar";
 import Sidebar from "../../components/Sidebar";
 import { getAllProductService } from "../../services/productService";
 import "./ListProduct.css";
+import { getAllCart } from "../../services/productService";
+import { createNewCart } from "../../services/cartService";
+import { toast } from "react-toastify";
 
 const ListProduct = () => {
 	const [fetchProductData, setFetchProductData] = useState([]);
@@ -13,7 +16,6 @@ const ListProduct = () => {
 	const [getAllCategory, setGetAllCategory] = useState({});
 
 	const [selectedCategory, setSelectedCategory] = useState("ALL");
-
 
 	useEffect(() => {
 		const fetchProduct = async () => {
@@ -33,23 +35,46 @@ const ListProduct = () => {
 		fetchProduct();
 	}, []);
 
-	const handleAddToCart = (product) => {
+	const handleAddToCart = async (product) => {
 		const user = JSON.parse(localStorage.getItem("user"));
 		const userId = user ? user.id : null;
 
-		if (userId) {
-			const currentCart = JSON.parse(localStorage.getItem("cart")) || [];
-			currentCart.push({
-				id: product._id,
-				name: product.name,
-				price: product.price,
-				image: product.image,
-			});
+		console.log('check userId', userId)
 
-			localStorage.setItem("cart", JSON.stringify(currentCart));
-			alert(`${product.name} đã được thêm vào giỏ hàng của bạn!`);
-		} else {
-			alert("Please log in first!");
+		if (!userId) {
+			toast.error("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng");
+			return;
+		}
+
+		const response = await getAllCart();
+
+		const userCarts = response.carts.filter(
+			(cart) => cart.idUser === user.id
+		);
+		const currentCart = Array.isArray(userCarts) ? userCarts : []; // Đảm bảo currentCart là một mảng
+
+		console.log('check currentCart', currentCart)
+
+		const productExists = currentCart.some((item) => item.nameProduct === product.name);
+
+		if (productExists) {
+			toast.warning("Sản phẩm đã có trong giỏ hàng");
+			return;
+		}
+
+
+		try {
+			const res = await createNewCart({
+				idUser: userId,
+				imageProduct: product.image,
+				nameProduct: product.name,
+				priceProduct: product.price,
+			});
+			if (res.errCode === 0) {
+				toast.success(res.message);
+			}
+		} catch (error) {
+			toast.error("Có lỗi xảy ra");
 		}
 	};
 
@@ -77,7 +102,7 @@ const ListProduct = () => {
 									<p>{item.description}</p>
 									<p className="price">Price: {item.price}</p>
 									<div className="actions">
-										<Link to={{ pathname: `/product/${item._id}`, state: { product: item } }} className="view-details-btn">
+										<Link to={{ pathname: `/product/${item._id}` }} className="view-details-btn">
 											View Details
 										</Link>
 										<Tooltip title="Add to Cart">

@@ -17,6 +17,17 @@ import VerifyEmail from './AdminVendors/Auth/VerifyEmail';
 import HomeVendor from './AdminVendors/HomeVendor/HomeVendor';
 import CuisineVendor from './AdminVendors/CuisineVendor/CuisineVendor';
 import OrderVendor from './AdminVendors/OrderVendor/OrderVendor';
+import SideDishes from './AdminVendors/SideDishes/SideDishes';
+import DetailCuisine from './AdminVendors/DetailCuisine/DetailCuisine';
+
+// Home
+import Login from "../pages/auth/Login/Login";
+import Register from "../pages/auth/Register/Register";
+import ContactPage from "../pages/Contactpage/Contactpage";
+import HomePage from "../pages/HomePage/HomePage";
+import ListProduct from "../pages/ListProduct/ListProduct";
+import ProductDetail from "../pages/ProductDetail/ProductDetail";
+import CartPage from "../pages/Cart/CartPage";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -31,6 +42,17 @@ function App() {
 				<div className="main-container">
 					<div className="content-container">
 						<Routes>
+
+							{/* Home */}
+
+							<Route path="/" element={<HomePage />} />
+							<Route path="/login" element={<Login />} />
+							<Route path="/register" element={<Register />} />
+							<Route path="/contactpage" element={<ContactPage />} />
+							<Route path="/listproduct" element={<ListProduct />} />
+							<Route path="/product/:id" element={<ProductDetail />} />
+							<Route path="/cart" element={<CartPage />} />
+
 							{/* SuperAdmin */}
 							<Route path={path.SUPERADMIN} element={<HeaderAdmin />} >
 								{/* Home */}
@@ -53,8 +75,11 @@ function App() {
 								<Route path="home" element={<HomeVendor />} />
 								<Route path="cuisine" element={<CuisineVendor />} />
 								<Route path="order" element={<OrderVendor />} />
-
+								<Route path="side-dishes" element={<SideDishes />} />
 							</Route>
+
+							<Route path="/admin-detail-cuisine/:id" element={<DetailCuisine />} />
+
 
 						</Routes>
 

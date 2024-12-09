@@ -44,12 +44,6 @@ function HeaderVendor() {
                         </NavLink>
 
                         <div className='container-general'>
-                              {/* <NavLink to="/vendor-admin/restaurants"
-                                    className={({ isActive }) => (isActive ? 'menu-item active' : 'menu-item')}
-                              >
-                                    <i className="fa-solid fa-utensils"></i>
-                                    Restaurants
-                              </NavLink> */}
 
                               <NavLink to="/vendor-admin/cuisine"
                                     className={({ isActive }) => (isActive ? 'menu-item active' : 'menu-item')}
@@ -58,12 +52,21 @@ function HeaderVendor() {
                                     Cuisines
                               </NavLink>
 
+                              <NavLink to="/vendor-admin/side-dishes"
+                                    className={({ isActive }) => (isActive ? 'menu-item active' : 'menu-item')}
+                              >
+                                    <i className="fa-solid fa-utensils"></i>
+                                    Side Dishes
+                              </NavLink>
+
                               <NavLink to="/vendor-admin/order"
                                     className={({ isActive }) => (isActive ? 'menu-item active' : 'menu-item')}
                               >
                                     <i className="fa-solid fa-motorcycle"></i>
                                     Orders
                               </NavLink>
+
+
                         </div>
 
                         <div className='container-management'>

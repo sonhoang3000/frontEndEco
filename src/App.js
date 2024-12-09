@@ -14,7 +14,10 @@ import ContactPage from "./pages/Contactpage/Contactpage";
 import HomePage from "./pages/HomePage/HomePage";
 import ListProduct from "./pages/ListProduct/ListProduct";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
+import CartPage from "./pages/Cart/CartPage";
+
 import { ToastContainer } from "react-toastify";
+
 
 function App() {
   const router = createBrowserRouter(
@@ -26,6 +29,7 @@ function App() {
         <Route path="/contactpage" element={<ContactPage />} />
         <Route path="/listproduct" element={<ListProduct />} />
         <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/cart" element={<CartPage />} />
 
       </Route>
     )

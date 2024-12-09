@@ -23,10 +23,9 @@
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-
 .cart-item:hover {
-  transform: scale(1.02); /* Thêm hiệu ứng phóng to khi hover */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Tăng độ đổ bóng */
+  transform: scale(1.02); /* ThÃªm hiá»‡u á»©ng phÃ³ng to khi hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* TÄƒng Ä‘á»™ Ä‘á»• bÃ³ng */
 }
 
 .cart-item img {
@@ -39,7 +38,7 @@
 .cart-item-info {
   flex: 1;
   text-align: left;
-  min-width: 150px; /* Đảm bảo có đủ không gian cho thông tin sản phẩm */
+  min-width: 150px; /* Äáº£m báº£o cÃ³ Ä‘á»§ khÃ´ng gian cho thÃ´ng tin sáº£n pháº©m */
 }
 
 .cart-item h2 {
@@ -75,7 +74,7 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s; /* Thêm hiệu ứng khi hover */
+  transition: background-color 0.3s; /* ThÃªm hiá»‡u á»©ng khi hover */
 }
 
 .quantity-controls button:hover {
@@ -102,20 +101,34 @@
   background-color: #c0392b;
 }
 
+.cart-total {
+  margin-top: 20px;
+  padding: 20px;
+  text-align: right;
+  border-top: 2px solid #f0f0f0;
+}
+
+.cart-total h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.cart-total span {
+  color: orange;
+  font-weight: bold;
+}
+
 .checkout-button {
-  padding: 12px 20px;
-  background-color: #2ecc71;
+  background-color: orange;
   color: white;
+  padding: 10px 20px;
+  font-size: 18px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 20px;
-  font-size: 1.2em;
-  transition: background-color 0.3s, transform 0.2s;
 }
 
-
 .checkout-button:hover {
-  background-color: #27ae60;
-  transform: scale(1.05); /* Thêm hiệu ứng phóng to khi hover */
+  background-color: darkorange;
 }

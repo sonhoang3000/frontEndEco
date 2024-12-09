@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import flag from "../assets/img/Co-Vietnam.webp";
 import logo from "../assets/img/logo_mealmate.png";
 import "../css/Navbar.css";
+import { getAllCart } from "../services/productService";
 
 function Navbar() {
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
@@ -18,13 +19,29 @@ function Navbar() {
 
   useEffect(() => {
     const userInfo = localStorage.getItem("user");
+    const user = userInfo ? JSON.parse(userInfo) : null;
+
+    const showQuantityCart = async () => {
+      try {
+        const response = await getAllCart();
+
+        const userCarts = response.carts.filter(
+          (cart) => cart.idUser === user.id
+        );
+        setCartItemCount(userCarts.length)
+      } catch (error) {
+        console.log("fetch showQuantityCart error", error);
+      }
+    };
+
+    showQuantityCart()
+
     if (userInfo) {
       setUser(JSON.parse(userInfo));
     }
-
-    const currentCart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCartItemCount(currentCart.length); // Set the cart item count
   }, []);
+
+
 
   const handleFoodClick = () => {
     navigate("/ListProduct");
@@ -77,13 +94,13 @@ function Navbar() {
         </a>
       </div>
 
-      {/* <div className="dropdown-item" onClick={handleCartClick}>
+      <div className="dropdown-item" onClick={handleCartClick}>
         <Badge count={cartItemCount} offset={[10, 0]}>
           <ShoppingCartOutlined
             style={{ fontSize: "35px", backgroundColor: "#d79875" }}
           />
         </Badge>
-      </div> */}
+      </div>
 
       {user?.id ? (
         <div className="userInfo-wrapper">
