@@ -7,15 +7,14 @@ import logo from "../assets/img/logo_mealmate.png";
 import "../css/Navbar.css";
 import { getAllCart } from "../services/productService";
 
-function Navbar() {
-  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
-  const [user, setUser] = useState();
-  const [cartItemCount, setCartItemCount] = useState(0); // For cart item count
-  const navigate = useNavigate();
 
-  const toggleUserDropdown = () => {
-    setIsUserDropdownOpen(!isUserDropdownOpen);
-  };
+function Navbar() {
+  const [searchQuery, setSearchQuery] = useState(""); // State lưu từ khóa tìm kiếm
+  const [cartItemCount, setCartItemCount] = useState(0); // Số lượng sản phẩm trong giỏ hàng
+  const [user, setUser] = useState(null); // Thông tin người dùng
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false); // Trạng thái dropdown người dùng
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const userInfo = localStorage.getItem("user");
@@ -41,14 +40,33 @@ function Navbar() {
     }
   }, []);
 
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+    console.log("Searching for:", e.target.value); // Log giá trị tìm kiếm
+  };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      console.log("Navigating to search-results with query:", searchQuery); // Log trước khi chuyển hướng
+      if (searchQuery.trim()) {
+        navigate(`/search-results?name=${searchQuery}`);
+      } else {
+        console.log("Search query is empty!");
+      }
+    }
+  };
+
+
+  const handleCartClick = () => {
+    navigate("/Cart");
+  };
 
   const handleFoodClick = () => {
     navigate("/ListProduct");
   };
 
-  const handleCartClick = () => {
-    navigate("/Cart");
+  const toggleUserDropdown = () => {
+    setIsUserDropdownOpen(!isUserDropdownOpen);
   };
 
   const handleLogout = () => {
@@ -58,20 +76,22 @@ function Navbar() {
     navigate("/");
   };
 
-
   return (
     <nav className="navbar">
-      <div
-        className="logo"
-        onClick={() => navigate("/")}
-        style={{ cursor: "pointer" }}
-      >
+      <div className="logo" onClick={() => navigate("/")}>
         <img src={logo} alt="Meal Mate Logo" className="logo-image" />
         Meal Mate
       </div>
 
       <div className="find_product">
-        <input type="text" placeholder="Tìm kiếm" className="search-bar" />
+        <input
+          type="text"
+          placeholder="Tìm kiếm"
+          className="search-bar"
+          value={searchQuery}
+          onChange={handleSearch}
+          onKeyDown={handleKeyDown} // Bắt sự kiện khi nhấn Enter
+        />
       </div>
 
       <div className="menu">
@@ -84,7 +104,7 @@ function Navbar() {
         </div>
 
         <a
-          href="/"
+          href="#"
           onClick={(e) => {
             e.preventDefault();
             navigate("/Contactpage");
@@ -96,9 +116,7 @@ function Navbar() {
 
       <div className="dropdown-item" onClick={handleCartClick}>
         <Badge count={cartItemCount} offset={[10, 0]}>
-          <ShoppingCartOutlined
-            style={{ fontSize: "35px", backgroundColor: "#d79875" }}
-          />
+          <ShoppingCartOutlined className="cart-icon" />
         </Badge>
       </div>
 

@@ -4,6 +4,7 @@ import "./CartPage.css";
 import { deleteCart, updateCart } from "../../services/cartService";
 import { getAllCart } from "../../services/productService";
 import { getAllSideDishService } from "../../services/sideDishService";
+import { useNavigate } from "react-router-dom";
 
 import { toast } from "react-toastify";
 
@@ -11,6 +12,8 @@ const Cart = () => {
 	const [cartItems, setCartItems] = useState([]);
 	const [sideDishes, setSideDishes] = useState([]);
 	const [total, setTotal] = useState(0);
+
+	const navigate = useNavigate();
 
 	const fetchCart = async () => {
 		try {
@@ -156,7 +159,9 @@ const Cart = () => {
 							))}
 							<div className="cart-total">
 								<h2>Tổng tiền: <span>{total} $</span></h2>
-								<button className="checkout-button">Thanh toán</button>
+								<button className="checkout-button"
+									onClick={() => navigate("/payment")}
+								>Mua hàng</button>
 							</div>
 						</div>
 					)}

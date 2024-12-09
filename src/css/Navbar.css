@@ -1,19 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
-/* Navbar styles */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #d79875;
   height: 80px;
-  width: 100%; 
+  width: 100%;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-family: "Inter", sans-serif;
+  cursor: pointer;
 }
 
 .logo {
@@ -51,14 +51,14 @@
   height: 25px;
 }
 
-.location, .userInfo-wrapper {
+.location,
+.userInfo-wrapper {
   font-size: 25px;
   color: white;
   position: relative;
   cursor: pointer;
 }
 
-/* Dropdown styles */
 .dropdown {
   position: absolute;
   top: 100%; /* Position dropdown below the button */
@@ -73,16 +73,13 @@
 }
 
 .dropdown-item {
-  
   cursor: pointer;
-  
 }
 
 .dropdown-item:hover {
   background-color: #f0f0f0;
 }
 
-/* Menu styles */
 .menu {
   display: flex;
   gap: 40px;
@@ -101,8 +98,9 @@
   text-decoration: none;
 }
 
-.menu-item span, .menu a {
-  color: white;  
+.menu-item span,
+.menu a {
+  color: white;
 }
 
 .menu-item:hover .underline {
@@ -123,7 +121,6 @@
   border-radius: 5px;
 }
 
-/* Login button styles */
 .login-button {
   background-color: white;
   color: #d79875;
@@ -141,7 +138,6 @@
   color: white;
 }
 
-/* User dropdown */
 .userInfo-wrapper .user-dropdown,
 .location .dropdown {
   color: #d79875;
@@ -155,7 +151,7 @@
 .dropdown-item .ant-badge .cart-icon {
   font-size: 35px;
   background-color: #d79875;
-  color: white !important;
+  color: white;
 }
 
 .flag {

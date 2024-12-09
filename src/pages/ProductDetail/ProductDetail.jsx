@@ -14,6 +14,7 @@ const ProductDetail = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
 	const [product, setProduct] = useState([]);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [selectAddProduct, setSelectAddProduct] = useState([]);
 	const [selectSideDishes, setSelectSideDishes] = useState([]);
 
@@ -65,6 +66,14 @@ const ProductDetail = () => {
 
 		fetchProductDetail();
 	}, [id]);
+
+	const openModal = () => {
+		setIsModalOpen(true);
+	};
+
+	const closeModal = () => {
+		setIsModalOpen(false);
+	};
 
 	const handleAddToCart = async (product) => {
 		const user = JSON.parse(localStorage.getItem("user"));
@@ -128,18 +137,19 @@ const ProductDetail = () => {
 		<>
 			<Navbar />
 			<div className="product-detail">
-				<>
-					<h1>{product.name}</h1>
+				<div className="left-section" onClick={openModal}>
 					<img src={product.image} alt={product.name} />
-					<p>{product.description}</p>
+				</div>
+				<div className="right-section">
+					<h1>{product.name}</h1>
 					<p>
-						<strong>Nguyên liệu:</strong>{" "}
-						{product.ingredients
-							? "co nguyen lieu"
-							: "Không khả dụng"}
+						<strong>Mô tả:</strong> {product.description}
 					</p>
 					<p>
-						<strong>Giá:</strong> ${product.price}
+						<strong>Nguyên liệu:</strong> {product.ingredients || "Không có thông tin"}
+					</p>
+					<p>
+						<strong>Giá:</strong> {product.price}đ
 					</p>
 					<p>
 						<strong>Danh mục:</strong> {product.category}
@@ -147,7 +157,7 @@ const ProductDetail = () => {
 					<button
 						onClick={() => handleAddToCart(product)}
 					>Thêm vào giỏ hàng</button>
-				</>
+				</div>
 			</div>
 
 			<div className="list-product-category">
@@ -166,6 +176,9 @@ const ProductDetail = () => {
 
 			</div>
 
+			<div className={`modal ${isModalOpen ? "open" : ""}`} onClick={closeModal}>
+				<img src={product.image} alt="Phóng to" />
+			</div>
 			<div className="show-add-side-dishes">
 				<h3>Các món ăn thêm có thể chọn</h3>
 				<ul className="side-dishes-list">
@@ -186,7 +199,6 @@ const ProductDetail = () => {
 					))}
 				</ul>
 			</div>
-
 		</>
 	);
 };
