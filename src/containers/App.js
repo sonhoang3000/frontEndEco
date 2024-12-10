@@ -29,7 +29,9 @@ import ListProduct from "../pages/ListProduct/ListProduct";
 import ProductDetail from "../pages/ProductDetail/ProductDetail";
 import CartPage from "../pages/Cart/CartPage";
 import UserProfile from "../pages/UserProfile/UserProfile";
-import SearchResults from "../components/SearchResults";
+// import SearchResults from "../components/SearchResults";
+import Payment from '../pages/Payment/Payment';
+import HistoryOrder from '../pages/HistoryOrder/HistoryOrder';
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -55,7 +57,9 @@ function App() {
 							<Route path="/product/:id" element={<ProductDetail />} />
 							<Route path="/cart" element={<CartPage />} />
 							<Route path="/profile" element={<UserProfile />} />
-							<Route path="/search-results" element={<SearchResults />} />
+							{/* <Route path="/search-results" element={<SearchResults />} /> */}
+							<Route path="/payment" element={<Payment />} />
+							<Route path="/history-order" element={<HistoryOrder />} />
 
 							{/* SuperAdmin */}
 							<Route path={path.SUPERADMIN} element={<HeaderAdmin />} >

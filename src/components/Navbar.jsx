@@ -104,7 +104,7 @@ function Navbar() {
         </div>
 
         <a
-          href="#"
+          href="/"
           onClick={(e) => {
             e.preventDefault();
             navigate("/Contactpage");
@@ -136,6 +136,12 @@ function Navbar() {
                 onClick={() => navigate("/profile")}
               >
                 Profile
+              </div>
+              <div
+                className="dropdown-item"
+                onClick={() => navigate("/history-order")}
+              >
+                Lịch sử đơn hàng
               </div>
               <div className="dropdown-item" onClick={handleLogout}>
                 Logout

@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 const Cart = () => {
 	const [cartItems, setCartItems] = useState([]);
 	const [sideDishes, setSideDishes] = useState([]);
+	const [selectedItems, setSelectedItems] = useState([]); // Lưu các sản phẩm được chọn
 	const [total, setTotal] = useState(0);
 
 	const navigate = useNavigate();
@@ -23,45 +24,36 @@ const Cart = () => {
 			if (user) {
 				const response = await getAllCart();
 
-
 				const userCarts = response.carts.filter(
 					(cart) => cart.idUser === user.id
 				);
 
-
-				const sideDishIds = userCarts[0]?.sideDishId || []; // Lấy danh sách sideDishId từ userCarts
-				const responseAllSideDishes = await getAllSideDishService("ALL")
+				const sideDishIds = userCarts[0]?.sideDishId || [];
+				const responseAllSideDishes = await getAllSideDishService("ALL");
 
 				const filteredSideDishes = responseAllSideDishes.sideDishes.filter(sideDish =>
-					sideDishIds.includes(sideDish._id) // Lọc những sideDish có _id trùng với sideDishIds
+					sideDishIds.includes(sideDish._id)
 				);
 
-				setSideDishes(filteredSideDishes)
-
-				console.log('check filteredSideDishes', filteredSideDishes)
+				setSideDishes(filteredSideDishes);
 
 				setCartItems(userCarts);
 				const total = userCarts.reduce((accumulator, cart) => {
-					// Tính giá trị của món ăn chính
 					let itemTotal = cart.priceProduct * cart.number;
 
-					// Nếu có món ăn kèm, cộng giá của các món ăn kèm
 					const sideDishTotal = filteredSideDishes
 						.filter(sideDish => cart.sideDishId?.includes(sideDish._id))
 						.reduce((sideDishAcc, sideDish) => sideDishAcc + sideDish.price, 0);
 
-					// Cộng tổng tiền của món chính và món ăn kèm
 					itemTotal += sideDishTotal;
 
 					return accumulator + itemTotal;
 				}, 0);
 
 				setTotal(total);
+			} else {
+				alert("Xin hãy đăng nhập");
 			}
-			else {
-				alert("Xin hãy đăng nhập")
-			}
-
 		} catch (error) {
 			console.log("fetch cart error", error);
 		}
@@ -71,10 +63,17 @@ const Cart = () => {
 		fetchCart();
 	}, []);
 
+	const toggleSelectItem = (item) => {
+		if (selectedItems.includes(item)) {
+			setSelectedItems(selectedItems.filter((i) => i !== item));
+		} else {
+			setSelectedItems([...selectedItems, item]);
+		}
+	};
+
 	const handleDeleteCart = async (id) => {
 		try {
 			const res = await deleteCart(id);
-			console.log('check res', res)
 			if (res.errCode === 0) {
 				toast.success(res.message);
 				fetchCart();
@@ -110,11 +109,18 @@ const Cart = () => {
 				<div className="cart">
 					<h1>Giỏ hàng của bạn</h1>
 					{cartItems.length === 0 ? (
-						<p style={{ color: "orange" }} >Giỏ hàng trống</p>
+						<p style={{ color: "orange" }}>Giỏ hàng trống</p>
 					) : (
 						<div>
 							{cartItems.map((item) => (
 								<div key={item.id} className="cart-item">
+									<div
+										className={`select-indicator ${selectedItems.includes(item) ? "selected" : ""}`}
+										onClick={() => toggleSelectItem(item)}
+									>
+										{/* Biểu tượng hiển thị trạng thái */}
+										{selectedItems.includes(item) ? "✔" : "○"}
+									</div>
 									<img
 										src={item.imageProduct}
 										alt={item.nameProduct}
@@ -159,9 +165,13 @@ const Cart = () => {
 							))}
 							<div className="cart-total">
 								<h2>Tổng tiền: <span>{total} $</span></h2>
-								<button className="checkout-button"
-									onClick={() => navigate("/payment")}
-								>Mua hàng</button>
+								<button
+									className="checkout-button"
+									onClick={() => navigate("/payment", { state: { selectedItems } })}
+									disabled={selectedItems.length === 0}
+								>
+									Mua hàng
+								</button>
 							</div>
 						</div>
 					)}

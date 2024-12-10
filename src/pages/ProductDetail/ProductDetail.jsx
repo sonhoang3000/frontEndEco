@@ -18,10 +18,8 @@ const ProductDetail = () => {
 	const [selectAddProduct, setSelectAddProduct] = useState([]);
 	const [selectSideDishes, setSelectSideDishes] = useState([]);
 
-	const storedVendor = localStorage.getItem("dataVendor");
-	const vendor = storedVendor ? JSON.parse(storedVendor) : null;
-
 	const [selectedItems, setSelectedItems] = useState([]); // State để theo dõi món đã chọn
+	const [vendorId, setVendorId] = useState("")
 
 	useEffect(() => {
 		const fetchProductDetail = async () => {
@@ -29,6 +27,9 @@ const ProductDetail = () => {
 				const response = await axios.get(
 					`http://localhost:8080/api/get-all-product?id=${id}`
 				);
+
+				console.log('check response', response.data.products.vendorId)
+				setVendorId(response.data.products.vendorId)
 
 				const responseSideDishes = await getAllSideDishService("ALL")
 
@@ -43,7 +44,7 @@ const ProductDetail = () => {
 
 				if (responseAddProduct && responseAddProduct.products) {
 					const filteredProducts = responseAddProduct.products.filter(
-						(product) => product.vendorId === vendor.id
+						(product) => product.vendorId === response.data.products.vendorId
 					);
 
 					const finalProducts = filteredProducts.filter(
@@ -108,7 +109,8 @@ const ProductDetail = () => {
 				imageProduct: product.image,
 				nameProduct: product.name,
 				priceProduct: product.price,
-				sideDishId: selectedItems
+				sideDishId: selectedItems,
+				vendorId: vendorId
 			});
 			if (res.errCode === 0) {
 				toast.success(res.message);

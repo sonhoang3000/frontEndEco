@@ -21,6 +21,7 @@ const ListProduct = () => {
 		const fetchProduct = async () => {
 			try {
 				const response = await getAllProductService("ALL");
+				console.log('check response', response.products)
 
 				const categories = response.products.map(product => product.category);
 				const uniqueCategories = [...new Set(categories)];
@@ -62,13 +63,13 @@ const ListProduct = () => {
 			return;
 		}
 
-
 		try {
 			const res = await createNewCart({
 				idUser: userId,
 				imageProduct: product.image,
 				nameProduct: product.name,
 				priceProduct: product.price,
+				vendorId: product.vendorId
 			});
 			if (res.errCode === 0) {
 				toast.success(res.message);
