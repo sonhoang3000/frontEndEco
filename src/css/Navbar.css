@@ -30,6 +30,7 @@
 }
 
 .search-bar {
+  margin-top: 20px;
   width: 470px;
   height: 50px;
   border-radius: 15px;

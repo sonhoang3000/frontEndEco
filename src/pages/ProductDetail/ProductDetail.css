@@ -15,7 +15,9 @@
 .product-detail .left-section,
 .product-detail .right-section {
   flex: 1;
+  margin-right: 20px; /* Optional, adjust as needed */
 }
+
 .product-detail h1 {
   font-size: 24px;
   font-weight: bold;
@@ -86,6 +88,7 @@
   width: 40px;
   text-align: center;
 }
+
 .modal {
   display: none;
   position: fixed;
@@ -117,14 +120,15 @@
   margin: 0 auto;
   display: block;
 }
-/*  */
 
+/* Align Sidebar with Product Card */
 .list-product-category {
-  position: relative;
-  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
   width: 100%;
-  max-width: 800px; /* Adjust the width based on your needs */
-  margin: auto;
+  max-width: 900px; /* Ensure the width fits your layout */
+  margin: 20px auto;
 }
 
 .product-carousel {
@@ -134,8 +138,7 @@
 }
 
 .product-card {
-  flex: 0 0 calc(25% - 10px); /* 4 items per row */
-  max-width: calc(25% - 10px);
+  flex: 1;
   text-align: center;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -179,13 +182,14 @@
 }
 
 .show-add-side-dishes {
+  flex: 0 0 300px;
   margin: 20px;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-height: 500px; /* Giới hạn chiều cao */
-  overflow-y: auto; /* Thêm thanh cuộn dọc khi nội dung vượt quá chiều cao */
+  max-height: 500px;
+  overflow-y: auto;
 }
 
 .show-add-side-dishes h3 {
@@ -198,7 +202,7 @@
   list-style-type: none;
   padding: 0;
   display: flex;
-  flex-direction: column; /* Đặt danh sách đi theo chiều dọc */
+  flex-direction: column;
   gap: 15px;
 }
 
@@ -218,7 +222,7 @@
 }
 
 .side-dish-img {
-  width: 80px; /* Giảm kích thước hình ảnh */
+  width: 80px;
   height: 80px;
   object-fit: cover;
   border-radius: 8px;
@@ -241,7 +245,6 @@
   margin: 0;
 }
 
-/* Hiển thị vòng tròn */
 .selection-indicator {
   position: absolute;
   top: 10px;
@@ -260,4 +263,45 @@
   height: 10px;
   background-color: #00acc1;
   border-radius: 50%;
+}
+
+.pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.pagination ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.pagination li {
+  display: inline;
+  margin: 0 5px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  background-color: #f0f0f0;
+  color: #333;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.pagination button:hover {
+  background-color: #f5b77c; /* Thay đổi màu khi hover */
+  color: white;
+}
+
+.pagination button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.pagination button.active {
+  background-color: #f5b77c;
+  color: white;
+  border-color: #f5b77c;
 }

@@ -1,119 +1,59 @@
 .profile-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 50px;
+  max-width: 600px; /* Thu gọn chiều rộng */
+  height: auto;
+  margin: 50px auto; /* Cách đều từ trên xuống dưới */
+  padding: 40px 20px; /* Giảm padding để tránh quá nhiều khoảng trắng */
   background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 16px; /* Góc bo mềm mại hơn */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Làm nổi khối mềm mại */
   font-family: "Arial", sans-serif;
-  color: #333;
+  color: #444; /* Màu chữ trung tính */
+  display: flex; /* Flexbox để căn chỉnh */
+  flex-direction: column; /* Sắp xếp dọc */
+  align-items: center; /* Căn giữa nội dung */
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 2px solid #eaeaea;
-  padding-bottom: 20px;
-  margin-bottom: 30px;
-}
-
-.header h2 {
-  margin: 0;
-  font-size: 28px;
-  color: orange;
-}
-
-.error-message {
-  color: #dd6356;
-  background-color: #f9d6d5;
-  padding: 12px 15px;
-  border-radius: 8px;
-  font-size: 16px;
-  margin-bottom: 25px;
+.profile-container h1 {
+  font-size: 1.8em; /* Kích thước vừa phải */
+  margin-bottom: 20px; /* Tạo khoảng cách dưới tiêu đề */
+  color: #222; /* Làm nổi bật tiêu đề */
   text-align: center;
 }
 
-.info-section {
-  margin-top: 30px;
-}
-
-label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: #555;
-  font-size: 16px;
-}
-
-input {
-  width: 100%;
-  max-width: 100%;
-  padding: 12px 15px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 16px;
-  color: #333;
-  background-color: #f9f9f9;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
-
-input:focus {
-  border-color: #4caf50;
-  outline: none;
-  background-color: #ffffff;
-}
-.button-container {
+.profile-container form {
+  width: 100%; /* Chiếm toàn bộ chiều rộng container */
+  max-width: 500px; /* Giới hạn chiều rộng tối đa */
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  align-items: center;
-  flex-wrap: wrap;
+  flex-direction: column; /* Sắp xếp các phần tử form theo cột */
+  gap: 15px; /* Khoảng cách giữa các thành phần trong form */
 }
 
-.delete-button,
-.save-button {
-  padding: 12px 20px;
-  font-size: 16px;
+.profile-container form input,
+.profile-container form textarea,
+.profile-container form button {
+  width: 100%;
+  padding: 10px 15px; /* Khoảng cách bên trong hợp lý */
+  font-size: 1rem; /* Kích thước chữ dễ đọc */
+  border: 1px solid #ccc; /* Đường viền nhẹ */
+  border-radius: 8px; /* Góc bo mềm mại */
+}
+
+.profile-container form input:focus,
+.profile-container form textarea:focus {
+  border-color: #007bff; /* Đổi màu viền khi focus */
+  outline: none; /* Bỏ đường viền mặc định */
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5); /* Hiệu ứng sáng viền */
+}
+
+.profile-container form button {
+  background-color: #007bff; /* Màu xanh nổi bật */
+  color: #ffffff;
   font-weight: bold;
-  border-radius: 8px;
+  border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  width: auto;
 }
 
-.delete-button {
-  background-color: #e74c3c;
-  color: #fff;
-}
-
-.delete-button:hover {
-  background-color: orange;
-}
-
-.save-button {
-  background-color: #4caf50;
-  color: #fff;
-}
-
-.save-button:hover {
-  background-color: #5a56d7;
-}
-
-@media (max-width: 768px) {
-  .profile-container {
-    padding: 25px;
-  }
-
-  .header h2 {
-    font-size: 22px;
-  }
-
-  .delete-button,
-  .save-button {
-    font-size: 14px;
-    padding: 10px 15px;
-  }
+.profile-container form button:hover {
+  background-color: #0056b3; /* Đổi màu khi hover */
 }

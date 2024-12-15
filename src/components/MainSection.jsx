@@ -17,6 +17,13 @@ const MainSection = () => {
 
   const randomBanner = banners[Math.floor(Math.random() * banners.length)];
  
+  const truncateText = (text, maxLength) => {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + "...";
+    }
+    return text;
+  };
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -64,7 +71,7 @@ const MainSection = () => {
         </div>
         <div className="xmai2"> Nổi Bật</div>
         <div className="product-grid">
-          {fetchProductData.slice(4, 8).map((product) => (
+          {fetchProductData.slice(6, 10).map((product) => (
             <div className="product-item" key={product._id || product.name}>
               <img src={product.image} alt={product.name} />
               <h3>{product.name}</h3>

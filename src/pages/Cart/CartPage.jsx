@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Navbar from "../../components/Navbar";
-import "./CartPage.css";
+
 import { deleteCart, updateCart } from "../../services/cartService";
 import { getAllCart } from "../../services/productService";
 import { getAllSideDishService } from "../../services/sideDishService";
-import { useNavigate } from "react-router-dom";
+import "./CartPage.css";
 
 import { toast } from "react-toastify";
 
@@ -29,6 +31,9 @@ const Cart = () => {
 				);
 
 				const sideDishIds = userCarts[0]?.sideDishId || [];
+
+				console.log('check sideDishIds',sideDishIds)
+
 				const responseAllSideDishes = await getAllSideDishService("ALL");
 
 				const filteredSideDishes = responseAllSideDishes.sideDishes.filter(sideDish =>
@@ -107,7 +112,7 @@ const Cart = () => {
 
 			<div className="cart-container">
 				<div className="cart">
-					<h1>Giỏ hàng của bạn</h1>
+					{/* <h1>Giỏ hàng của bạn</h1> */}
 					{cartItems.length === 0 ? (
 						<p style={{ color: "orange" }}>Giỏ hàng trống</p>
 					) : (
@@ -178,7 +183,10 @@ const Cart = () => {
 				</div>
 			</div>
 
+			{/* <Footer /> */}
 		</>
+
+
 	);
 };
 

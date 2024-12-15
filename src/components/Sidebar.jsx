@@ -6,7 +6,8 @@ const Sidebar = ({ getAllCategory, setSelectedCategory }) => {
 		<div
 			className="sidebar"
 			style={{
-				width: "200px",
+				width: "250px",
+				// height:"800px",
 				backgroundColor: "#f8f9fa",
 				padding: "20px",
 				borderRadius: "8px",
@@ -14,11 +15,11 @@ const Sidebar = ({ getAllCategory, setSelectedCategory }) => {
 				marginRight: "20px",
 			}}
 		>
-			<h3 style={{ fontSize: "18px", fontWeight: "bold" }}>Danh mục</h3>
+			<h3 style={{ fontSize: "20px", fontWeight: "bold" }}>Danh mục</h3>
 			<ul style={{ listStyle: "none", padding: 0 }}>
 				<li
 					style={{
-						margin: "10px 0",
+						margin: "20px 0",
 						cursor: "pointer",
 					}}
 					onClick={() => setSelectedCategory("ALL")}
@@ -30,7 +31,7 @@ const Sidebar = ({ getAllCategory, setSelectedCategory }) => {
 						<li
 							key={index}
 							style={{
-								margin: "10px 0",
+								margin: "15px 0",
 								cursor: "pointer",
 							}}
 							onClick={() => setSelectedCategory(category)}

@@ -25,8 +25,6 @@
   gap: 50px;
 }
 
-
-
 h1 {
   font-size: 3rem; 
   font-weight: bold; 
@@ -36,8 +34,8 @@ h1 {
   line-height: 1.2;
   text-transform: uppercase; 
   letter-spacing: 2px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
-  background: linear-gradient(to right, #f08f35, #ec9d67); 
+  /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);  */
+  background: linear-gradient(to right, #fcfcfc, #ffffff); 
   -webkit-background-clip: text; 
   -webkit-text-fill-color: transparent;
 }
@@ -51,24 +49,41 @@ h1 {
   line-height: 1.3;
   text-transform: uppercase; 
   letter-spacing: 1.5px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); 
-  background: linear-gradient(to right, #ec9d67, #f5b77c);
+  /* text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);  */
+  background: linear-gradient(to right, #ffffff, #ffffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; 
 }
 
+.xmai {
+  font-size: 1.2rem; 
+  font-weight: 400;
+  color: #333; 
+  max-width: 900px; 
+  margin: 20px auto; 
+  text-align: center; 
+  line-height: 1.8; 
+  background-color: rgba(246, 239, 239, 0.8); 
+  padding: 20px; 
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
 
-.grid-container {
+/* Cập nhật lại .product-grid để căn giữa và giới hạn mỗi hàng tối đa 5 sản phẩm */
+.product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-  gap: 20px; 
-  margin-top: 20px;
+  grid-template-columns: repeat(5, 1fr); /* Mỗi hàng tối đa 5 sản phẩm */
+  gap: 20px; /* Khoảng cách giữa các sản phẩm */
+  justify-content: center; /* Căn giữa các thẻ sản phẩm theo chiều ngang */
+  padding: 20px 0;
+  margin: 0 auto; /* Căn giữa toàn bộ grid */
+  max-width: 1200px; /* Đảm bảo grid không rộng quá */
 }
 
 .product-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* Căn giữa các phần tử bên trong thẻ sản phẩm */
   justify-content: space-between;
   text-align: center;
   padding: 20px;
@@ -84,7 +99,7 @@ h1 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.product-item image {
+.product-item img {
   width: 184px; /* Chiều rộng cố định */
   height: 248px; /* Chiều cao cố định */
   background-size: cover; /* Đảm bảo ảnh không bị méo và giữ tỉ lệ */
@@ -171,56 +186,6 @@ p {
   border-left: 4px solid #f4a261; 
 }
 
-
-.TopSeller + .TopSeller {
-  margin-top: 50px;
-}
-
-
-.xmai {
-  font-size: 1.2rem; 
-  font-weight: 400;
-  color: #333; 
-  max-width: 900px; 
-  margin: 20px auto; 
-  text-align: center; 
-  line-height: 1.8; 
-  background-color: rgba(246, 239, 239, 0.8); 
-  padding: 20px; 
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-}
-
-.view-details-btn {
-  display: inline-block; 
-  padding: 10px 20px; 
-  background-color: #f4a261; 
-  color: #fff;
-  font-size: 16px; 
-  font-weight: bold;
-  text-decoration: none; 
-  border-radius: 5px; 
-  text-align: center; 
-  transition: background-color 0.3s, transform 0.3s; 
-}
-
-.view-details-btn:hover {
-  background-color: #e76f51; 
-  transform: scale(1.05);
-}
-
-.view-details-btn:active {
-  transform: scale(1); 
-}
-h3 {
-  font-size: 24px; 
-  font-weight: bold; 
-  color: #333;
-  text-align: center; 
-  margin: 20px 0;
-  letter-spacing: 2px; 
-}
-
 .reviews-section {
   margin-top: 40px;
 }
@@ -271,4 +236,26 @@ h3 {
   color: #333;
   margin-top: 10px;
   line-height: 1.6;
+}
+
+.view-details-btn {
+  display: inline-block; 
+  padding: 10px 20px; 
+  background-color: #f4a261; 
+  color: #fff;
+  font-size: 16px; 
+  font-weight: bold;
+  text-decoration: none; 
+  border-radius: 5px; 
+  text-align: center; 
+  transition: background-color 0.3s, transform 0.3s; 
+}
+
+.view-details-btn:hover {
+  background-color: #e76f51; 
+  transform: scale(1.05);
+}
+
+.view-details-btn:active {
+  transform: scale(1); 
 }

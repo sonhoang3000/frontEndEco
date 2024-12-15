@@ -35,7 +35,7 @@ function UserProfile() {
     if (userId) {
       fetchUser();
     } else {
-      setError('Không có ID người dùng.');
+      // setError('Không có ID người dùng.');
     }
   }, [userId]);
 
