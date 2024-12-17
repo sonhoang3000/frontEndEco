@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { getAllProductService } from "../../src/services/productService";
 import "../css/MainSection.css";
 import Banner from "./banner";
-import { getALlRating } from "../services/ratingSrvice";
+import { getALlRating } from "../services/ratingService";
 
 const MainSection = () => {
   const [fetchProductData, setFetchProductData] = useState([]);

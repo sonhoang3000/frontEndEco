@@ -3,7 +3,7 @@ import "./HistoryOrder.css";
 import { getAllOrder } from "../../services/orderService";
 import Navbar from "../../components/Navbar";
 import RatingModal from "../../components/RatingModal/RatingModal";
-import { createNewRating } from "../../services/ratingSrvice";
+import { createNewRating } from "../../services/ratingService";
 
 function HistoryOrder() {
   const [fetchHistoryOrder, setFetchHistoryOrder] = useState([]);
