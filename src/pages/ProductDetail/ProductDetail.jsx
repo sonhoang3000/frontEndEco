@@ -1,16 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-
 import "./ProductDetail.css";
 import { getAllProductService } from "../../services/productService";
 import { toast } from "react-toastify";
 import { getAllCart } from "../../services/productService";
 import { createNewCart } from "../../services/cartService";
 import { getAllSideDishService } from "../../services/sideDishService";
+import { getListRating } from "../../services/ratingSrvice";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -20,6 +19,7 @@ const ProductDetail = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectSideDishes, setSelectSideDishes] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
+  const [listRating, setListRating] = useState([]);
   const [vendorId, setVendorId] = useState("");
   const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
   const [itemsPerPage] = useState(4); // Số sản phẩm mỗi trang
@@ -64,8 +64,14 @@ const ProductDetail = () => {
         console.error(err);
       }
     };
-
+    const fetchRating = async () => {
+      const res = await getListRating(id);
+      if (res?.errCode === 0) {
+        setListRating(res.data);
+      }
+    };
     fetchProductDetail();
+    fetchRating();
   }, [id]);
 
   const openModal = () => setIsModalOpen(true);
@@ -133,6 +139,34 @@ const ProductDetail = () => {
       <div className="product-detail">
         <div className="left-section" onClick={openModal}>
           <img src={product.image} alt={product.name} />
+          <div className="rating-list">
+            {listRating.length > 0 ? (
+              listRating.map((rating, index) => (
+                <div className="rating-item" key={index}>
+                  <div className="rating-header">
+                    <div className="user-info">
+                      <span className="user-name">{rating.userId.name}</span>
+                      <span className="user-rating">
+                        {Array.from({ length: rating.rating }).map(
+                          (_, index) => (
+                            <span key={index} className="rating-star">
+                              ⭐
+                            </span>
+                          )
+                        )}
+                      </span>
+                    </div>
+                    <span className="rating-date">
+                      {new Date(rating.createdAt).toLocaleDateString()}
+                    </span>
+                  </div>
+                  <div className="rating-comment">{rating.comment}</div>
+                </div>
+              ))
+            ) : (
+              <p>No ratings available.</p>
+            )}
+          </div>
         </div>
         <div className="right-section">
           <h1>{product.name}</h1>

@@ -264,6 +264,67 @@
   background-color: #00acc1;
   border-radius: 50%;
 }
+.rating-list {
+  max-width: 400px;
+  max-height: 250px;
+  overflow-y: auto;
+  margin: 20px auto;
+  padding: 0;
+  list-style: none;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.rating-item {
+  padding: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.rating-item:last-child {
+  border-bottom: none;
+}
+
+.rating-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-name {
+  font-weight: bold;
+  color: #333;
+}
+
+.rating-date {
+  font-size: 12px;
+  color: #888;
+}
+
+.rating-comment {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}
+.user-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.rating-star {
+  color: #ffd700;
+  font-size: 16px;
+}
 
 .pagination {
   text-align: center;
