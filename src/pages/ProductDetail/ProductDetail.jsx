@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { getAllCart } from "../../services/productService";
 import { createNewCart } from "../../services/cartService";
 import { getAllSideDishService } from "../../services/sideDishService";
-import { getListRating } from "../../services/ratingSrvice";
+import { getListRating } from "../../services/ratingService";
 
 const ProductDetail = () => {
   const { id } = useParams();
