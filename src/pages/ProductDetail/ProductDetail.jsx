@@ -36,7 +36,7 @@ const ProductDetail = () => {
         const responseSideDishes = await getAllSideDishService("ALL");
         if (responseSideDishes && responseSideDishes.sideDishes) {
           const filteredSideDishes = responseSideDishes.sideDishes.filter(
-            (sideDish) => response.data.products.sideDishId.includes(sideDish._id)
+            (sideDish) => response.data.products.sideDishId?.includes(sideDish._id)
           );
           setSelectSideDishes(filteredSideDishes);
         }
@@ -55,7 +55,7 @@ const ProductDetail = () => {
         }
 
         if (response.data.errCode === 0) {
-          setProduct(response.data.products);
+          setProduct(response.data.products[0]);
         } else {
           console.log(response.data.errMessage || "Không có sản phẩm");
         }
@@ -115,7 +115,7 @@ const ProductDetail = () => {
   };
 
   const handleSelectDish = (dishId) => {
-    if (selectedItems.includes(dishId)) {
+    if (selectedItems?.includes(dishId)) {
       setSelectedItems(selectedItems.filter((id) => id !== dishId));
     } else {
       setSelectedItems([...selectedItems, dishId]);
@@ -225,7 +225,7 @@ const ProductDetail = () => {
               onClick={() => handleSelectDish(dish._id)}
             >
               <div className="selection-indicator">
-                {selectedItems.includes(dish._id) && <div className="circle"></div>}
+                {selectedItems?.includes(dish._id) && <div className="circle"></div>}
               </div>
               <img src={dish.image} alt={dish.name} className="side-dish-img" />
               <div className="side-dish-info">
