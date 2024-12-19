@@ -1,0 +1,63 @@
+.vendor-filter {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .vendor-filter label {
+    font-size: 16px;
+    margin-right: 10px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  #vendor-select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    width: 300px;
+    transition: border-color 0.3s ease;
+  }
+  
+  #vendor-select:hover {
+    border-color: #007bff;
+  }
+  
+  #vendor-select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  #vendor-select option {
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+  }
+  
+  #vendor-select option:hover {
+    background-color: #f1f1f1;
+    color: #007bff;
+  }
+  
+.vendor-filter label {
+    font-size: 16px;
+    font-weight: bold; 
+    color: #2E8B57; 
+    margin-right: 15px; 
+    display: inline-block; 
+    cursor: pointer; 
+    text-transform: uppercase; 
+    transition: all 0.3s ease; 
+  }
+  
+  .vendor-filter label:hover {
+    color: #2E8B57; 
+    text-decoration: underline; 
+  }
+  

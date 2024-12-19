@@ -1,0 +1,98 @@
+h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #2e8b57;
+  margin: 40px 0;
+  text-align: center;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 15px 20px;
+  text-align: left;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  color: #333;
+}
+
+.admin-table th {
+  background-color: #2e8b57;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.admin-table td {
+  background-color: #fafafa;
+}
+
+.admin-table tr:nth-child(even) td {
+  background-color: #f2f2f2;
+}
+
+.admin-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.admin-table td {
+  border-bottom: 1px solid #ddd;
+}
+
+.product-info {
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.product-info img {
+  margin-right: 10px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  width: 40px;
+  height: 40px;
+}
+
+.product-info span {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+}
+
+.admin-table td[colspan="7"] {
+  text-align: center;
+  font-size: 16px;
+  color: #777;
+  padding: 20px;
+  font-style: italic;
+  background-color: #fff;
+}
+
+.admin-table tr:hover td {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.loading-message {
+  text-align: center;
+  font-size: 18px;
+  color: #2e8b57;
+  font-weight: 600;
+  margin-top: 20px;
+}
