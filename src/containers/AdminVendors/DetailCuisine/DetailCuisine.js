@@ -4,18 +4,19 @@ import { getAllProductService, updateSideDishProductService } from "../../../ser
 import { getAllSideDishService } from '../../../services/sideDishService';
 import './DetailCuisine.css';
 const ProductDetail = ({ product }) => (
-      <div className="product-detail">
-        <h1>{product.name}</h1>
-        <img src={product.image} alt={product.name} />
-        <div className="product-details">
-             <p>{product.description}</p> {/* Mô tả sản phẩm */}
-          <p><strong>Nguyên liệu:</strong> {product.ingredients ? "Có nguyên liệu" : "Không khả dụng"}</p>
-          <p><strong>Giá:</strong> ${product.price}</p>
-          <p><strong>Danh mục:</strong> {product.category}</p>
-        </div>
-      </div>
-    );
-    
+
+
+  <div className="product-detail">
+    <h1>{product[0]?.name}</h1>
+    <img src={product[0]?.image} alt={product[0]?.name} />
+    <div className="product-details">
+      <p>{product[0]?.description}</p> {/* Mô tả sản phẩm */}
+      <p><strong>Nguyên liệu:</strong> {product[0]?.ingredients ? "Có nguyên liệu" : "Không khả dụng"}</p>
+      <p><strong>Giá:</strong> ${product[0]?.price}</p>
+      <p><strong>Danh mục:</strong> {product[0]?.category}</p>
+    </div>
+  </div>
+);
 
 const SideDishesTable = ({ sideDishes, addSideDishToProduct, isActive }) => (
   <table className="admin-table">

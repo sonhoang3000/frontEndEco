@@ -133,3 +133,59 @@ select:focus {
   margin-bottom: 5px;
   color: #2c3e50;
 }
+
+h5 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  background-color: #f8f8f8;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+h5:hover {
+  background-color: #f1f1f1;
+  color: #007bff;
+}
+
+h5 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  background-color: #f8f8f8;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+h5:hover {
+  background-color: #f1f1f1;
+  color: #007bff;
+}
+label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 8px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+input[type="text"]:focus {
+  border-color: #007bff;
+  outline: none;
+}

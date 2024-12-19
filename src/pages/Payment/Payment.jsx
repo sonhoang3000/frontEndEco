@@ -127,7 +127,7 @@ function Payment() {
                   <h2 className="payment-title">Thanh toán</h2>
 
                   <div className="cart-summary">
-                        <h3>Các sản phẩm được chọn:</h3>
+                        <label>Các sản phẩm được chọn:</label>
                         {itemsToCheckout.map((item) => (
                               <div key={item.id} className="cart-item-summary">
                                     <img src={item.imageProduct} alt={item.nameProduct} className="item-image" />
@@ -149,7 +149,7 @@ function Payment() {
                               </div>
                         )}
 
-                        <h3>Tổng tiền: {total} VND</h3>
+                        <h5>Tổng tiền: {total} VND</h5>
                   </div>
 
                   <div className="form-group">

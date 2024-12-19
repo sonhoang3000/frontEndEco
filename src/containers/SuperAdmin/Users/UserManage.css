@@ -1,53 +1,143 @@
-//TableManageUser
-#TableManageUser {
-      font-family: Arial, Helvetica, sans-serif;
-      border-collapse: collapse;
-      width: 100%;
+.user-manage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+  margin: 20px;
 }
 
-#TableManageUser td,
-#TableManageUser th {
-      border: 1px solid #ddd;
-      padding: 8px;
+.form-container {
+  width: 100%;
+  max-width: 1300px;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
 }
 
-#TableManageUser tr:hover {
-      background-color: #ddd;
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-#TableManageUser th {
-      padding-top: 12px;
-      padding-bottom: 12px;
-      text-align: left;
-      background-color: #04aa6d;
-      color: white;
+.user-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
 }
 
-.btn-edit {
-      width: 30px;
-      border: none;
-      outline: none;
-      background: transparent;
-      color: orange;
-      margin-right: 5px;
-
-      &:hover {
-            background-color: transparent !important;
-            color: orange !important;
-
-      }
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-.btn-delete {
-      width: 30px;
-      border: none;
-      outline: none;
-      background: transparent;
-      color: red;
+.button-group button {
+  /* padding: 10px; */
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-      &:hover {
-            background-color: transparent !important;
-            color: red !important;
+.button-group .update-button {
+  /* background-color: #4CAF50; */
+  color: white;
+}
 
-      }
+.button-group .update-button:hover {
+  opacity: 0.8;
+}
+
+.button-group .delete-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.button-group .delete-button:hover {
+  opacity: 0.8;
+}
+
+.user-list {
+  width: 100%;
+  max-width: 1300px;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+.user-list h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th,
+table td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #ddd;
+  color: black;
+}
+
+table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+table td button {
+  padding: 12px 24px;
+  margin: 0 8px;
+  border: none;
+  /* background-color: #388e3c; */
+  color: white;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+
+table td button:hover {
+  background-color: #2c6b29;
+  transform: scale(1.1);
+}
+
+table td button:nth-child(2) {
+  background-color: #f44336;
+}
+
+table td button:nth-child(2):hover {
+  background-color: #e53935;
+  transform: scale(1.1);
+}
+
+.user-list table {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.user-list table td,
+.user-list table th {
+  white-space: nowrap;
+}
+
+table td button {
+  margin-right: 10px;
+}
+
+table td .button-group {
+  display: inline-flex;
+  gap: 10px;
 }

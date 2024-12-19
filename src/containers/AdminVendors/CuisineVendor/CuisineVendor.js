@@ -155,7 +155,7 @@ function CuisineVendor() {
 	return (
 		<>
 			<div>
-				<h3 className="admin-title">THÊM MỚI SẢN PHẨM </h3>
+				<h2 className="admin-title">THÊM MỚI SẢN PHẨM </h2>
 				<div className="form-row">
 					<input
 						type="text"
@@ -237,7 +237,7 @@ function CuisineVendor() {
 							className="table-row"
 							onClick={() => navigate(`/admin-detail-cuisine/${item._id}`)}
 						>
-							<td>{index + 1}</td> 
+							<td>{index + 1}</td>
 							<td>{item._id}</td>
 							<td>{item.name}</td>
 							<td>
@@ -271,7 +271,7 @@ function CuisineVendor() {
 										className="delete-button"
 										onClick={(e) => {
 											handleDeleteProduct(item._id)
-											e.stopPropagation(); 
+											e.stopPropagation();
 										}
 										}
 									>

@@ -8,7 +8,7 @@ const Sidebar = ({ getAllCategory, setSelectedCategory }) => {
 			style={{
 				width: "250px",
 				// height:"800px",
-				backgroundColor: "#f8f9fa",
+				backgroundColor: "#949f9c",
 				padding: "20px",
 				borderRadius: "8px",
 				boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",

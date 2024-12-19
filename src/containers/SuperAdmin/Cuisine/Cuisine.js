@@ -45,7 +45,7 @@ function Cuisine() {
             <div>
                   <div className="cuisine-container">
                         <div className="cuisine-background"></div>
-                        <h3 className="cuisine-title">THÊM MỚI SẢN PHẨM</h3>
+                        <h2 className="cuisine-title">THÊM MỚI SẢN PHẨM</h2>
                         <div className="form-row">
                               <input
                                     type="text"

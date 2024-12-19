@@ -30,13 +30,13 @@ const ProductDetail = () => {
 				const response = await axios.get(
 					`http://localhost:8080/api/get-all-product?id=${id}`
 				);
-				setVendorId(response.data.products.vendorId);
-				setProduct(response.data.products);
+				setVendorId(response.data.products[0].vendorId);
+				setProduct(response.data.products[0]);
 
 				const responseSideDishes = await getAllSideDishService("ALL");
 				if (responseSideDishes && responseSideDishes.sideDishes) {
 					const filteredSideDishes = responseSideDishes.sideDishes.filter(
-						(sideDish) => response.data.products.sideDishId?.includes(sideDish._id)
+						(sideDish) => response.data.products[0].sideDishId?.includes(sideDish._id)
 					);
 					setSelectSideDishes(filteredSideDishes);
 				}
@@ -44,7 +44,7 @@ const ProductDetail = () => {
 				const responseAddProduct = await getAllProductService("ALL");
 				if (responseAddProduct && responseAddProduct.products) {
 					const filteredProducts = responseAddProduct.products.filter(
-						(product) => product.vendorId === response.data.products.vendorId
+						(product) => product.vendorId === response.data.products[0].vendorId
 					);
 
 					const finalProducts = filteredProducts.filter(
@@ -117,6 +117,7 @@ const ProductDetail = () => {
 	const handleSelectDish = (dishId) => {
 		if (selectedItems?.includes(dishId)) {
 			setSelectedItems(selectedItems.filter((id) => id !== dishId));
+			console.log('check selectedItems', selectedItems)
 		} else {
 			setSelectedItems([...selectedItems, dishId]);
 		}
@@ -169,7 +170,7 @@ const ProductDetail = () => {
 					</div>
 				</div>
 				<div className="right-section">
-					<h1>{product.name}</h1>
+					<h2>{product.name}</h2>
 					<p>
 						<strong>Mô tả:</strong> {product.description}
 					</p>

@@ -1,0 +1,22 @@
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  color: #333;
+  text-align: center;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s ease;
+}
+
+.title span {
+  color: #e60f8c;
+}
+
+.title span.no-vendor {
+  color: #ff0000;
+  font-style: italic;
+}

@@ -15,7 +15,7 @@ const Dashboard = () => {
         const storedDataVendor = localStorage.getItem("dataVendor");
         if (storedDataVendor) {
             const vendor = JSON.parse(storedDataVendor);
-            setVendorId(vendor.id); 
+            setVendorId(vendor.id);
         } else {
             toast.error("Vui lòng đăng nhập lại");
         }
@@ -69,7 +69,7 @@ const Dashboard = () => {
             <h2 className="dashboard-title">Dashboard Doanh Thu</h2>
             <div className="dashboard-content">
                 <div className="revenue-info">
-                    <h3>Doanh thu tổng: <span className="revenue-amount">{totalRevenue} VND</span></h3>
+                    <h4>Doanh thu tổng: <span className="revenue-amount">{totalRevenue} VND</span></h4>
                 </div>
 
                 <div className="date-filter">

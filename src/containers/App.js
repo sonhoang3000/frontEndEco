@@ -24,20 +24,19 @@ import SearchResults from "../components/SearchResults";
 import Login from "../pages/auth/Login/Login";
 import Register from "../pages/auth/Register/Register";
 import CartPage from "../pages/Cart/CartPage";
+import Chat from '../pages/Chat/Chat';
+import ContactPage from "../pages/Contactpage/Contactpage";
 import HistoryOrder from '../pages/HistoryOrder/HistoryOrder';
 import HomePage from "../pages/HomePage/HomePage";
 import ListProduct from "../pages/ListProduct/ListProduct";
 import Payment from '../pages/Payment/Payment';
 import ProductDetail from "../pages/ProductDetail/ProductDetail";
 import UserProfile from "../pages/UserProfile/UserProfile";
-import Chat from '../pages/Chat/Chat';
+import { ChatContextProvider } from '../context/ChatContext';
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { path } from "../utils";
-
-import { ChatContextProvider } from '../context/ChatContext';
-
 
 function App() {
 	const storedUser = localStorage.getItem("user");
@@ -57,7 +56,7 @@ function App() {
 								<Route path="/" element={<HomePage />} />
 								<Route path="/login" element={<Login />} />
 								<Route path="/register" element={<Register />} />
-								<Route path="/chat" element={<Chat />} />
+								<Route path="/contactpage" element={<ContactPage />} />
 								<Route path="/listproduct" element={<ListProduct />} />
 								<Route path="/product/:id" element={<ProductDetail />} />
 								<Route path="/cart" element={<CartPage />} />
@@ -65,6 +64,7 @@ function App() {
 								<Route path="/search-results" element={<SearchResults />} />
 								<Route path="/payment" element={<Payment />} />
 								<Route path="/history-order" element={<HistoryOrder />} />
+								<Route path="/chat" element={<Chat />} />
 
 								{/* SuperAdmin */}
 								<Route path={path.SUPERADMIN} element={<HeaderAdmin />} >
@@ -83,6 +83,7 @@ function App() {
 								<Route path={path.VERIFY_EMAIL} element={<VerifyEmail />} />
 
 								{/* Vendor */}
+								<Route path="/vendor-admin/:id" element={<Vendor />} />
 								<Route path={path.VENDORADMIN} element={<HeaderVendor />}>								{/* <Route path="home" element={<HeaderVendor />} /> */}
 									<Route path="home" element={<HomeVendor />} />
 									<Route path="cuisine" element={<CuisineVendor />} />

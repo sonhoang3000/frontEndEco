@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { useFetchRecipient } from '../../hooks/useFetchRecipient'
-import { Stack } from 'react-bootstrap'
 import { ChatContext } from '../../context/ChatContext'
 
 function UserChat({ chat, user }) {
@@ -11,7 +10,7 @@ function UserChat({ chat, user }) {
 	const isOnline = onlineUsers?.some((user) => user?.userId === recipientUser?._id)
 
 	return (
-		<Stack
+		<div
 			direction="horizontal"
 			gap={3}
 			className='user-card align-items-center p-2 justify-content-between'
@@ -28,7 +27,7 @@ function UserChat({ chat, user }) {
 				<span className={isOnline ? "user-online" : ""} ></span>
 			</div>
 
-		</Stack>
+		</div>
 	)
 }
 
